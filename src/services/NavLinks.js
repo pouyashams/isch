@@ -1,78 +1,34 @@
 const navLinks = [
 
     {
-        path: "/product-category",
-        name: "ویژگی نوع کالا",
+        path: "/vaziyat-prozhe-amaliyati",
+        name: "وضعیت پروژه عملیاتی",
         icon: "fa fa-sliders",
     },
-
     {
-        path: "/definition-product-category",
-        name: "تعریف نوع کالا",
-        icon: "fa fa-product-hunt",
-    },
-
-    {
-        path: "/add-product",
-        name: "اضافه کردن کالا",
-        icon: "fa fa-plus-square",
+        path: "/tarkib-darayi",
+        name: "ترکیب دارایی ها",
+        icon: "fa fa-sliders",
     },
     {
-        path: "/product-management",
-        name: "مدیریت کالا",
-        icon: "fa fa-refresh",
+        path: "/motalebat-movagh",
+        name: "مطالبات معوق",
+        icon: "fa fa-sliders",
     },
     {
-        path: "/simcard-management",
-        name: "مدیریت سیمکارت",
-        icon: "fa fa-refresh",
+        path: "/gozaresh-mamuriyat-kharej-keshvar",
+        name: "گزارش مامورت خارج کشور",
+        icon: "fa fa-sliders",
     },
     {
-        path: "/Confirmation",
-        name: "بررسی فروش",
-        icon: "fa fa-shopping-cart",
+        path: "/gozaresh-hesabresi-mostaghel",
+        name: "گزارش حسابرسی مستقل",
+        icon: "fa fa-sliders",
+    },  {
+        path: "/gharardadhaye-mohem",
+        name: "قرارداد های مهم",
+        icon: "fa fa-sliders",
     },
-    {
-        path: "/deliveryInfo-management",
-        name: "مدیریت ارسال",
-        icon: "fa fa-envelope-o",
-    },
-    // {
-    //     path: "/internetInfos",
-    //     name: "مدیریت بسته اینترنت",
-    //     icon: "fa fa-internet-explorer",
-    // },
-    {
-        path: "/merchant-management",
-        name: "مدیریت پذیرنده",
-        icon: "fa fa-user-md",
-    },
-    {
-        path: "/customer-management",
-        name: "مدیریت مشتری",
-        icon: "fa fa-user",
-    },
-    {
-        path: "/report-of-charge",
-        name: "گزارش شارژ",
-        icon: "fa fa-align-left",
-    },
-    {
-        path: "/report-of-bill",
-        name: "گزارش قبض",
-        icon: "fa fa-align-center",
-    },
-    {
-        path: "/report-of-internet-pack",
-        name: "گزارش بسته اینترنت",
-        icon: "fa fa-align-right",
-    },
-
-    {
-        path: "/hardwareInfo",
-        name: "وضعیت سخت افزار",
-        icon: "fa fa-cogs",
-    }
 ];
 
 const getNavLinks = () => {
