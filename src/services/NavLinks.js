@@ -29,6 +29,11 @@ const navLinks = [
         name: "قرارداد های مهم",
         icon: "fa fa-sliders",
     },
+    {
+        path: "/etelaat-paye-sherkati",
+        name: "اطلاعات پایه شرکت ها",
+        icon: "fa fa-sliders",
+    },
 ];
 
 const getNavLinks = () => {

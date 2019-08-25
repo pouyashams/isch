@@ -22,6 +22,9 @@ import addGozareshHesabresiMostaghel from "./components/gozareshHesabresiMostagh
 import gharardadhayeMohem from "./components/gharardadhayeMohem/gharardadhayeMohem";
 import addGharardadhayeMohem from "./components/gharardadhayeMohem/edit";
 
+import telaatPayeSherkati from "./components/etelaat-paye-sherkati/etelaatPayeSherkati";
+import addTelaatPayeSherkati from "./components/etelaat-paye-sherkati/edit";
+
 class App extends Component {
     render() {
         return (
@@ -56,6 +59,9 @@ class App extends Component {
 
                                 <PrivateRoute path="/gharardadhaye-mohem" exact={false} component={gharardadhayeMohem}/>
                                 <PrivateRoute path="/add-gharardadhaye-mohem" exact={false} component={addGharardadhayeMohem}/>
+
+                                <PrivateRoute path="/etelaat-paye-sherkati" exact={false} component={telaatPayeSherkati}/>
+                                <PrivateRoute path="/add-etelaat-paye-sherkati" exact={false} component={addTelaatPayeSherkati}/>
 
                                 <PrivateRoute path="/" exact={true} component={vaziyatProjeAmaliyati}/>
 

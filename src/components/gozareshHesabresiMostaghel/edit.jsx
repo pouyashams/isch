@@ -4,7 +4,7 @@ import {withRouter} from 'react-router-dom';
 import SearchResult from "../search/search-result"
 
 import DatePicker from "../SimpleDatePicker";
-import "../textArea.css"
+import "../../css/textArea.css"
 
 class editDeliveryInfo extends Component {
 

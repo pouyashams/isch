@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 // import {toast} from 'react-toastify';
 import DatePicker from "../SimpleDatePicker";
-import "../textArea.css"
+// import "../textArea.css"
 import SearchResult from "../search/search-result"
 
 class editDeliveryInfo extends Component {

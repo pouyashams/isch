@@ -3,7 +3,7 @@ import {withRouter} from 'react-router-dom';
 // import {toast} from 'react-toastify';
 import SearchResult from "../search/search-result"
 
-import "../textArea.css"
+import "../../css/textArea.css"
 
 class editDeliveryInfo extends Component {
 

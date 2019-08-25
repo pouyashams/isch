@@ -1,10 +1,9 @@
 import React, {Component} from 'react'
 // import {toast} from 'react-toastify';
-import "../../css/textArea.css"
 import SearchResult from "../search/search-result"
 import {withRouter} from 'react-router-dom';
 
-class deliveryInfoManagement extends Component {
+class etelaatPayeSherkati extends Component {
 
     constructor(props) {
         super(props);
@@ -48,7 +47,7 @@ class deliveryInfoManagement extends Component {
 
     onAdd() {
         this.props.history.push({
-            pathname: '/add-gozaresh-mamuriyat-kharej-keshvar',
+            pathname: '/add-etelaat-paye-sherkati',
         });
     }
 
@@ -57,12 +56,13 @@ class deliveryInfoManagement extends Component {
             showCheckBox: false,
             actions: [],
             headerTitleInfos: [
-                {name: "name", title: "نام و نام خانوادگی"},
-                {name: "mozuProje", title: "سمت"},
-                {name: "sefareshDahnde", title: "موضوع ماموریت"},
-                {name: "tasvibMagham", title: "محل اجرای ماموریت"},
-                {name: "gharardad", title: "مدت ماموریت"},
-                {name: "mablaghGharardad", title: "سایر توضیحات و ملاحظات"},
+                {name: "name", title: "نام شرکت"},
+                {name: "mozuProje", title: "شناسه ملی شرکت"},
+                {name: "sefareshDahnde", title: "کد اقتصادی"},
+                {name: "tasvibMagham", title: "شماره ثبت"},
+                {name: "gharardad", title: "تاریخ تاسیس"},
+                {name: "mablaghGharardad", title: "نوع ثبتی شرکت "},
+                {name: "mablagd", title: "سهام شرکت "},
             ]
         };
         return headerInfo;
@@ -75,7 +75,7 @@ class deliveryInfoManagement extends Component {
             <div
                 className="rtl border bg-light shadow row w-100 m-0 text-center justify-content-center align-items-center my-3">
                 <div className="col-12 justify-content-center align-items-center text-center header-box text-light">
-                    <h4 className="py-2">گزارش ماموریت خارج از کشور</h4>
+                    <h4 className="py-2">اطلاعات پایه شرکت ها</h4>
                 </div>
                 <div
                     className="rtl border bg-light shadow row w-100 m-0 py-4 px-2">
@@ -92,4 +92,4 @@ class deliveryInfoManagement extends Component {
     }
 }
 
-export default withRouter(deliveryInfoManagement);
+export default withRouter(etelaatPayeSherkati);
