@@ -9,9 +9,11 @@ class etelaatPayeSherkati extends Component {
         super(props);
         this.state = {
             pageSize: 5,
-            data: [],
+            data: [{name:"pouya"}],
         };
         this.onAdd = this.onAdd.bind(this);
+        this.onUpdate = this.onUpdate.bind(this);
+        this.onShow = this.onShow.bind(this);
     }
 
     //
@@ -44,6 +46,20 @@ class etelaatPayeSherkati extends Component {
     // }
     //
 
+    onUpdate(searchResult) {
+        this.props.history.push({
+            pathname: '/edit-company',
+            productInfo: searchResult
+        });
+    }
+
+    onShow(searchResult) {
+        this.props.history.push({
+            pathname: '/show-company',
+            productInfo:searchResult
+            // Object.assign(searchResult,{checkUpdate: false})
+        });
+    }
 
     onAdd() {
         this.props.history.push({
@@ -54,7 +70,22 @@ class etelaatPayeSherkati extends Component {
     getResultTableHeader() {
         let headerInfo = {
             showCheckBox: false,
-            actions: [],
+            actions: [
+                {
+                    name: 'edit',
+                    title: 'ویرایش',
+                    icon: 'fa fa-th-list',
+                    style: 'btn btn-success btn-xs',
+                    onclick: this.onUpdate
+                },
+                {
+                    name: 'show',
+                    title: 'نمایش',
+                    icon: 'fa fa-check-square',
+                    style: 'btn btn-success btn-xs',
+                    onclick: this.onShow
+                }
+            ],
             headerTitleInfos: [
                 {name: "name", title: "نام شرکت"},
                 {name: "mozuProje", title: "شناسه ملی شرکت"},
@@ -81,7 +112,7 @@ class etelaatPayeSherkati extends Component {
                     className="rtl border bg-light shadow row w-100 m-0 py-4 px-2">
                     <SearchResult headerInfo={headerInfo} searchResultList={data} pageSize={pageSize}/>
                     <div className="col-12 text-center justify-content-center">
-                    <input type="button" className="btn btn-success" value="اضافه کردن" onClick={() => {
+                        <input type="button" className="btn btn-success" value="اضافه کردن" onClick={() => {
                             this.onAdd();
                         }}/>
                     </div>

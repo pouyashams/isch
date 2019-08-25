@@ -23,7 +23,9 @@ import gharardadhayeMohem from "./components/gharardadhayeMohem/gharardadhayeMoh
 import addGharardadhayeMohem from "./components/gharardadhayeMohem/edit";
 
 import telaatPayeSherkati from "./components/etelaat-paye-sherkati/etelaatPayeSherkati";
-import addTelaatPayeSherkati from "./components/etelaat-paye-sherkati/edit";
+import addTelaatPayeSherkati from "./components/etelaat-paye-sherkati/addCompany";
+import showCompany from "./components/etelaat-paye-sherkati/showCompany";
+import editCompany from "./components/etelaat-paye-sherkati/editCompany";
 
 class App extends Component {
     render() {
@@ -62,6 +64,8 @@ class App extends Component {
 
                                 <PrivateRoute path="/etelaat-paye-sherkati" exact={false} component={telaatPayeSherkati}/>
                                 <PrivateRoute path="/add-etelaat-paye-sherkati" exact={false} component={addTelaatPayeSherkati}/>
+                                <PrivateRoute path="/show-company" exact={false} component={showCompany}/>
+                                <PrivateRoute path="/edit-company" exact={false} component={editCompany}/>
 
                                 <PrivateRoute path="/" exact={true} component={vaziyatProjeAmaliyati}/>
 
