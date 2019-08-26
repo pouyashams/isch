@@ -26,6 +26,8 @@ import telaatPayeSherkati from "./components/etelaat-paye-sherkati/etelaatPayeSh
 import addTelaatPayeSherkati from "./components/etelaat-paye-sherkati/addCompany";
 import showCompany from "./components/etelaat-paye-sherkati/showCompany";
 import editCompany from "./components/etelaat-paye-sherkati/editCompany";
+import staffStatus from "./components/staff-status/staff-status";
+import statusOfConsultants from "./components/status-of-consultants/statusOfConsultants";
 
 class App extends Component {
     render() {
@@ -66,6 +68,9 @@ class App extends Component {
                                 <PrivateRoute path="/add-etelaat-paye-sherkati" exact={false} component={addTelaatPayeSherkati}/>
                                 <PrivateRoute path="/show-company" exact={false} component={showCompany}/>
                                 <PrivateRoute path="/edit-company" exact={false} component={editCompany}/>
+
+                                <PrivateRoute path="/staff-status" exact={false} component={staffStatus}/>
+                                <PrivateRoute path="/status-of-consultants" exact={false} component={statusOfConsultants}/>
 
                                 <PrivateRoute path="/" exact={true} component={vaziyatProjeAmaliyati}/>
 

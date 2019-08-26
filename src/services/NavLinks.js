@@ -30,6 +30,16 @@ const navLinks = [
         icon: "fa fa-sliders",
     },
     {
+        path: "/staff-status",
+        name: "وضعیت کارکنان",
+        icon: "fa fa-sliders",
+    },
+    {
+        path: "/status-of-consultants",
+        name: "وضعیت مشاوران",
+        icon: "fa fa-sliders",
+    },
+    {
         path: "/etelaat-paye-sherkati",
         name: "اطلاعات پایه شرکت ها",
         icon: "fa fa-sliders",
