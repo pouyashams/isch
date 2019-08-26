@@ -15,6 +15,7 @@
 .sidebar-sticky {
     position: relative;
     top: 0;
+    background: url('../images/light-grey-terrazzo.png');
     height: calc(100vh - 48px);
     padding-top: 0.5rem;
     overflow-x: hidden;

@@ -81,7 +81,7 @@ class deliveryInfoManagement extends Component {
             <div
                 className="rtl border bg-light shadow row w-100 m-0 text-center justify-content-center align-items-center my-3">
                 <div className="col-12 justify-content-center align-items-center text-center header-box text-light">
-                    <h4 className="py-2">وضعیت کارکنان</h4>
+                    <h4 className="py-2">وضعیت مشاوران</h4>
                 </div>
                 <div
                     className="rtl border bg-light shadow row w-100 m-0 py-4 px-2">
