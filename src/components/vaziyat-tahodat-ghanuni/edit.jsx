@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 // import {toast} from 'react-toastify';
 import SearchResult from "../search/search-result"
+
 import "../../css/textArea.css"
 
 class editDeliveryInfo extends Component {
@@ -9,8 +10,8 @@ class editDeliveryInfo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [],
             pageSize: 5,
+            data: [],
             name: "",
             mozuProje: "",
             sefareshDahnde: "",
@@ -55,7 +56,6 @@ class editDeliveryInfo extends Component {
         });
     };
 
-
     fillParameterValue = (value, name) => {
         this.setState({[name]: value});
     };
@@ -65,43 +65,37 @@ class editDeliveryInfo extends Component {
             showCheckBox: false,
             actions: [],
             headerTitleInfos: [
-                {name: "name", title: "موضوع قرارداد"},
-                {name: "mozuProje", title: " طرف قرارداد"},
-                {name: "sefareshDahnde", title: "مدت قرارداد"},
-                {name: "tasvibMagham", title: "مبلغ قرارداد"},
-                {name: "gharardad", title: "  درصد تکمیل کار"},
-                {name: "mablaghGharardad", title: "مبالغ پرداختی تا کنون"},
-                {name: "mablaghGharardad", title: "تعهدات باقی مانده"},
+                {name: "name", title: "سال مالی"},
+                {name: "mozuProje", title: "تعهدات مالی دوره جاری"},
+                {name: "sefareshDahnde", title: "تعهدات مالی سنوات گذشته"},
+                {name: "tasvibMagham", title: "سایر تعهدات قانونی دوره جاری"},
+                {name: "gharardad", title: "سایر تعهدات قانونی سنوات گذشته"},
+                {name: "mablaghGharardad", title: "مانده کل تعهدات قانونی"},
+                {name: "mablaghGharardad", title: "ذخیره موجود در حسابها"},
+                {name: "mablaghGharardad", title: "کسری ذخیره"}
+                ,
             ]
         };
         return headerInfo;
     }
 
-
     render() {
         const headerInfo = this.getResultTableHeader();
         const {data, pageSize} = this.state;
         return (
+            <div>
+
+
             <div
                 className="rtl border bg-light shadow row w-100 m-0 text-center justify-content-center align-items-center my-3">
                 <div className="col-12 justify-content-center align-items-center text-center header-box text-light">
-                    <h4 className="py-2">افزودن قرارداد مهم</h4>
+                    <h4 className="py-2">افزودن تعهدات قانونی</h4>
                 </div>
                 <div className="col-12 justify-content-center align-items-center text-center">
                     <div
                         className="rtl border m-0 bg-light shadow float-right row w-100 justify-content-start my-3 pb-3">
                         <div className="form-group col-12 col-sm-6 col-md-3 float-right">
-                            <label>موضوع قرارداد :</label>
-                            <input className="form-control text-center"
-                                   type="input"
-                                   step="any"
-                                   placeholder="---"
-                                   value={this.state.name}
-                                   name="name"
-                                   onChange={(e) => this.fillParameterValue(e.target.value, e.target.name)}
-                            />
-                        </div>  <div className="form-group col-12 col-sm-6 col-md-3 float-right">
-                            <label>طرف قرارداد :</label>
+                            <label>سال مالی :</label>
                             <input className="form-control text-center"
                                    type="input"
                                    step="any"
@@ -111,9 +105,19 @@ class editDeliveryInfo extends Component {
                                    onChange={(e) => this.fillParameterValue(e.target.value, e.target.name)}
                             />
                         </div>
-
                         <div className="form-group col-12 col-sm-6 col-md-3 float-right">
-                            <label>مدت قرارداد :</label>
+                            <label>مانده کل تعهدات قانونی :</label>
+                            <input className="form-control text-center"
+                                   type="input"
+                                   step="any"
+                                   placeholder="---"
+                                   value={this.state.mozuProje}
+                                   name="mozuProje"
+                                   onChange={(e) => this.fillParameterValue(e.target.value, e.target.name)}
+                            />
+                        </div>
+                        <div className="form-group col-12 col-sm-6 col-md-3 float-right">
+                            <label>ذخیره موجود در حسابها :</label>
                             <input className="form-control text-center"
                                    type="input"
                                    step="any"
@@ -124,7 +128,7 @@ class editDeliveryInfo extends Component {
                             />
                         </div>
                         <div className="form-group col-12 col-sm-6 col-md-3 float-right">
-                            <label>درصد تکمیل کار :</label>
+                            <label>کسری ذخیره :</label>
                             <input className="form-control text-center"
                                    type="input"
                                    step="any"
@@ -135,51 +139,89 @@ class editDeliveryInfo extends Component {
                             />
                         </div>
                         <div className="form-group col-12 col-sm-6 col-md-3 float-right">
-                            <label>مبالغ پرداختی تا کنون :</label>
-                            <input className="form-control text-center"
-                                   type="input"
-                                   step="any"
-                                   placeholder="---"
-                                   value={this.state.gharardad}
-                                   name="gharardad"
+                            <label className="float-right"> تعهدات مالی دوره جاری :</label>
+                            <div className=" input-group">
+                                <div className="input-group addon">
+                         <textarea className="form-control text-center"
+                             // value={""}
+                                   name={"description"}
                                    onChange={(e) => this.fillParameterValue(e.target.value, e.target.name)}
-                            />
+                         />
+                                </div>
+                            </div>
                         </div>
-                        <div className="form-group col-12 float-right">
-                            <label>سایر توضیحات و ملاحظات :</label>
-                            <textarea className="col-5 form-control text-center  "
-                                // value={""}
-                                      name={"description"}
-                                      onChange={(e) => this.fillParameterValue(e.target.value, e.target.name)}
-                            />
+
+                        <div className="form-group col-12 col-sm-6 col-md-3 float-right">
+                            <label className="float-right">تعهدات مالی سنوات گذشته :</label>
+                            <div className="input-group">
+                                <div className="input-group addon">
+                         <textarea className="form-control text-center"
+                             // value={""}
+                                   name={"description"}
+                                   onChange={(e) => this.fillParameterValue(e.target.value, e.target.name)}
+                         />
+                                </div>
+                            </div>
                         </div>
+                        <div className="form-group col-12 col-sm-6 col-md-3 float-right">
+                            <label className="float-right"> سایر تعهدات قانونی دوره جاری :</label>
+                            <div className="input-group">
+                                <div className="input-group addon">
+                         <textarea className="form-control text-center"
+                             // value={""}
+                                   name={"description"}
+                                   onChange={(e) => this.fillParameterValue(e.target.value, e.target.name)}
+                         />
+                                </div>
+                            </div>
+                        </div>
+                        <div className="form-group col-12 col-sm-6 col-md-3 float-right">
+                            <label className="float-right">سایر تعهدات قانونی سنوات گذشته :</label>
+                            <div className="input-group">
+                                <div className="input-group addon">
+                         <textarea className="form-control text-center"
+                             // value={""}
+                                   name={"description"}
+                                   onChange={(e) => this.fillParameterValue(e.target.value, e.target.name)}
+                         />
+                                </div>
+                            </div>
+                        </div>
+
+
                         <div className=" row w-100 m-0 text-center justify-content-center align-items-center my-3">
-                            <div>
+                            <div className="p-2">
                                 <input type="button" className="btn btn-warning" value="افزودن"
                                        onClick={this.addData}/>
                             </div>
+
                         </div>
                     </div>
-
-                    {data.length !== 0 ? <div>
-                        <div
-                            className="rtl border bg-light shadow row w-100 m-0 py-4 px-2">
-                            <SearchResult headerInfo={headerInfo} searchResultList={data} pageSize={pageSize}/>
-                        </div>
-                        <div className=" row w-100 m-0 text-center justify-content-center align-items-center my-3">
-                            <div className="p-2">
-                                <input type="button" className="btn btn-success" value="اضافه کردن"
-                                       onClick={this.sendDataTimeInfo}/>
+                    {data.length !== 0 ?
+                        <div>
+                            <div
+                                className="rtl border bg-light shadow row w-100 m-0 py-4 px-2">
+                                <SearchResult headerInfo={headerInfo} searchResultList={data} pageSize={pageSize}/>
+                                <div className="col-12 text-center justify-content-center">
+                                </div>
                             </div>
-                            <div className="p-2">
-                                <input type="button" className="btn btn-danger" value="لغو"
-                                       onClick={this.addTime}/>
+                            <div className=" row w-100 m-0 text-center justify-content-center align-items-center my-3">
+                                <div className="p-2">
+                                    <input type="button" className="btn btn-success" value="اضافه کردن"
+                                           onClick={this.sendDataTimeInfo}/>
+                                </div>
+                                <div className="p-2">
+                                    <input type="button" className="btn btn-danger" value="لغو"
+                                           onClick={this.addTime}/>
+                                </div>
                             </div>
-                        </div>
-                    </div> : null}
+                        </div> : null
+                    }
 
 
                 </div>
+
+            </div>
             </div>
         );
     }

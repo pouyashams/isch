@@ -28,6 +28,17 @@ import showCompany from "./components/etelaat-paye-sherkati/showCompany";
 import editCompany from "./components/etelaat-paye-sherkati/editCompany";
 import staffStatus from "./components/staff-status/staff-status";
 import statusOfConsultants from "./components/status-of-consultants/statusOfConsultants";
+import mosavabatHeyatModire from "./components/mosavabat-heyat-modire/mosavabatHeyatModire";
+import addMosavabatHeyatModire from "./components/mosavabat-heyat-modire/edit";
+import vaziatTahodatGhanuni from "./components/vaziyat-tahodat-ghanuni/vaziatTahodatGhanuni";
+import addVaziatTahodatGhanuni from "./components/vaziyat-tahodat-ghanuni/edit";
+import kharidFurushDarayihayeSabet from "./components/kharid-furush-darayihaye-sabet/kharidFurushDarayihayeSabet";
+import budjeNaghdi from "./components/budje-naghdi/budjeNaghdi";
+import soudZiyanDore from "./components/soud-ziyan-dore/soudZiyanDore";
+import sarmayegozariTeyDore from "./components/sarmayegozari-teye-dore/sarmayegozariTeyDore";
+import addSarmayegozariTeyDore from "./components/sarmayegozari-teye-dore/edit";
+import soudSahamMosavab from "./components/soud-saham-mosavab/soudSahamMosavab";
+import addSoudSahamMosavab from "./components/soud-saham-mosavab/edit";
 
 class App extends Component {
     render() {
@@ -71,6 +82,20 @@ class App extends Component {
 
                                 <PrivateRoute path="/staff-status" exact={false} component={staffStatus}/>
                                 <PrivateRoute path="/status-of-consultants" exact={false} component={statusOfConsultants}/>
+                                <PrivateRoute path="/mosvabat-heyat-modire" exact={false} component={mosavabatHeyatModire}/>
+                                <PrivateRoute path="/add-mosvabat-heyat-modire" exact={false} component={addMosavabatHeyatModire}/>
+
+                                <PrivateRoute path="/vaziyat-tahodat-ghanuni" exact={false} component={vaziatTahodatGhanuni}/>
+                                <PrivateRoute path="/add-vaziyat-tahodat-ghanuni" exact={false} component={addVaziatTahodatGhanuni}/>
+
+                                <PrivateRoute path="/kharid-furush-darayi-sabet" exact={false} component={kharidFurushDarayihayeSabet}/>
+                                <PrivateRoute path="/budje-naghdi" exact={false} component={budjeNaghdi}/>
+                                <PrivateRoute path="/soud-ziyan-dore" exact={false} component={soudZiyanDore}/>
+
+                                <PrivateRoute path="/sarmayegozari-tey-dore" exact={false} component={sarmayegozariTeyDore}/>
+                                <PrivateRoute path="/add-sarmayegozari-tey-dore" exact={false} component={addSarmayegozariTeyDore}/>
+                                <PrivateRoute path="/soud-saham-mosavab" exact={false} component={soudSahamMosavab}/>
+                                <PrivateRoute path="/add-soud-saham-mosavab" exact={false} component={addSoudSahamMosavab}/>
 
                                 <PrivateRoute path="/" exact={true} component={vaziyatProjeAmaliyati}/>
 
