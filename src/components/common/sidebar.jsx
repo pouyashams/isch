@@ -29,13 +29,13 @@ class Sidebar extends Component {
         return (
             <nav className="col-2 position-fixed d-none d-md-block bg-light sidebar">
                 <div className="sidebar-sticky">
-                    <div className="sidebar-header pb-3 pt-1 justify-content-center">
-                        <div className="user-info justify-content-center text-center">
-                            <span className="user-name justify-content-center">
-                                <strong>شرکت آیسان</strong>
-                            </span>
-                        </div>
-                    </div>
+                    {/*<div className="sidebar-header pb-3 pt-1 justify-content-center">*/}
+                    {/*    <div className="user-info justify-content-center text-center">*/}
+                    {/*        <span className="user-name justify-content-center">*/}
+                    {/*            <strong>شرکت آیسان</strong>*/}
+                    {/*        </span>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                     <ul className="nav flex-column">
                         {navLinks.map(nav => (
                             <li className="nav-item sidebar-dropdown" key={count++}>

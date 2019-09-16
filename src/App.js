@@ -97,7 +97,7 @@ class App extends Component {
                                 <PrivateRoute path="/soud-saham-mosavab" exact={false} component={soudSahamMosavab}/>
                                 <PrivateRoute path="/add-soud-saham-mosavab" exact={false} component={addSoudSahamMosavab}/>
 
-                                <PrivateRoute path="/" exact={true} component={vaziyatProjeAmaliyati}/>
+                                <PrivateRoute path="/" exact={true} component={telaatPayeSherkati}/>
 
                                 <Redirect to="/not-found"/>
                             </Switch>

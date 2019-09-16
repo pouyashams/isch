@@ -15,11 +15,17 @@
 .sidebar-sticky {
     position: relative;
     top: 0;
-    background: url('../images/light-grey-terrazzo.png');
     height: calc(100vh - 48px);
+    background: #C9D6FF;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #E2E2E2, #C9D6FF);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #E2E2E2, #C9D6FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+
     padding-top: 0.5rem;
     overflow-x: hidden;
     overflow-y: auto;
+    opacity: 0.9;
 }
 
 @supports ((position: -webkit-sticky) or (position: sticky)) {
@@ -67,15 +73,24 @@
 }
 
 .sidebar-dropdown:hover {
-    background: #494e53;
+    background: #35966d;
+}
+
+.icon-title{
+    color: black;
 }
 
 .sidebar-dropdown:hover .icon-title {
-    color: #007bff;
+    color: #fff;
 }
 
+
+.sidebar-dropdown .fa {
+    color: #35966d;
+
+}
 .sidebar-dropdown:hover .fa {
-    color: #007bff;
+    color: #fff;
     animation: shake 2s cubic-bezier(.36, .07, .19, .97) both;
     transform: translate3d(0, 0, 0);
     backface-visibility: hidden;

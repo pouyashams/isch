@@ -18,6 +18,7 @@ class Login extends Component {
                 sessionStorage.removeItem("login-message");
                 // await getUserInfo();
                 this.props.history.replace('/');
+                document.getElementById("loading").style.display = "none";
             } else {
                 toast.error('نام کاربری یا کلمه عبور اشتباه هست');
             }

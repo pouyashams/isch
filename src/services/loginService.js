@@ -1,22 +1,25 @@
 import axios from "axios";
 
 export async function login(username, password) {
+    console.log(username)
+    console.log(password)
     const data = {
         username: username,
         password: password
     };
-    let access_token = null;
+    let accessToken = null;
     await axios({
         method: 'POST',
-        url: `http://shop.isuncharge.com/isunshop/fetch/access-token`,
+        url: `http://shop.isuncharge.com/ISCHolding/api/auth/signin`,
         headers: {
             'Content-Type': 'application/json',
         },
         data: data
     }).then(response => {
-        access_token = response.data.access_token;
+        console.log(response)
+        accessToken = response.data.accessToken;
     }).catch((error) => {
         throw error
     });
-    return access_token;
+    return accessToken;
 }

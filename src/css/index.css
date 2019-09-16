@@ -151,13 +151,12 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'yekan', 'Segoe UI',
-        'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-        'Helvetica Neue', sans-serif !important;
-    background: url('../images/light-blue-brushed.png') repeat center center
-        fixed;
+    font-family: -apple-system, BlinkMacSystemFont, 'yekan', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !important;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background: #e3eaff; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #e3eaff, #e2e2e2); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #e3eaff, #e2e2e2);
 }
 
 code {
@@ -225,4 +224,28 @@ code {
     width: 30px;
     font-size: 37px;
     background-color: #ccc !important;
+}
+
+.navBar {
+    background: #141E30;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.panel-header {
+    background: #134E5E;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #71B280, #134E5E);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #71B280, #134E5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.card-wrap {
+    position: relative;
+}
+.card-wrap .close {
+    position: absolute;
+    top: 3px;
+    left: 5px;
+    z-index: 100;
+    color: #fff;
 }

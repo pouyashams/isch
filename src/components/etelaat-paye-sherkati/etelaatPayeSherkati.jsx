@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
-// import {toast} from 'react-toastify';
+import {toast} from 'react-toastify';
 import SearchResult from "../search/search-result"
 import {withRouter} from 'react-router-dom';
+import {loadAllCompany} from "../../services/companyService";
+
 
 class etelaatPayeSherkati extends Component {
 
@@ -9,56 +11,53 @@ class etelaatPayeSherkati extends Component {
         super(props);
         this.state = {
             pageSize: 5,
-            data: [{name:"pouya"}],
+            data: [],
         };
         this.onAdd = this.onAdd.bind(this);
         this.onUpdate = this.onUpdate.bind(this);
         this.onShow = this.onShow.bind(this);
     }
 
-    //
-    // async componentDidMount() {
-    //     try {
-    //         const result = await loadDataOfCity();
-    //         if (result.status === 200) {
-    //             const data = [];
-    //             result.data.data.forEach((dataInfo) => {
-    //                 data.push(
-    //                     {
-    //                         identifier: dataInfo.provinceInfo.identifier,
-    //                         name: dataInfo.provinceInfo.name,
-    //                         numberOfProduct: dataInfo.numberOfProduct,
-    //                         waitingDay: dataInfo.waitingDay,
-    //                         numberOfDate: dataInfo.numberOfDate,
-    //                         deliveryAmount: dataInfo.deliveryAmount,
-    //                         timePeriodList: dataInfo.timePeriodList
-    //                     }
-    //                 )
-    //             });
-    //             this.setState({data, dataInfo: result.data.data});
-    //         }
-    //     } catch (ex) {
-    //         if (ex.response && ex.response.status === 400) {
-    //             toast.error('خطایی در دریافت اطلاعات رخ داده است.');
-    //         }
-    //     }
-    //     document.getElementById("loading").style.display = "none";
-    // }
-    //
+
+    async componentDidMount() {
+        try {
+            const result = await loadAllCompany();
+            if (result.status === 200) {
+                const data = [];
+                result.data.data.forEach((dataInfo) => {
+                    data.push(
+                        {
+                            name: dataInfo.name,
+                            nationalCode: dataInfo.nationalCode,
+                            activityTopic: dataInfo.activityTopic,
+                            registrationCode: dataInfo.registrationCode
+                        }
+                    )
+                });
+                this.setState({data, dataInfo: result.data.data});
+            }
+        } catch (ex) {
+            if (ex.response && ex.response.status === 400) {
+                toast.error('خطایی در دریافت اطلاعات رخ داده است.');
+            }
+        }
+        document.getElementById("loading").style.display = "none";
+    }
+
 
     onUpdate(searchResult) {
-        this.props.history.push({
-            pathname: '/edit-company',
-            productInfo: searchResult
-        });
+        // this.props.history.push({
+        //     pathname: '/edit-company',
+        //     productInfo: searchResult
+        // });
     }
 
     onShow(searchResult) {
-        this.props.history.push({
-            pathname: '/show-company',
-            productInfo:searchResult
-            // Object.assign(searchResult,{checkUpdate: false})
-        });
+        // this.props.history.push({
+        //     pathname: '/show-company',
+        //     productInfo: searchResult
+        //     Object.assign(searchResult,{checkUpdate: false})
+        // });
     }
 
     onAdd() {
@@ -88,12 +87,9 @@ class etelaatPayeSherkati extends Component {
             ],
             headerTitleInfos: [
                 {name: "name", title: "نام شرکت"},
-                {name: "mozuProje", title: "شناسه ملی شرکت"},
-                {name: "sefareshDahnde", title: "کد اقتصادی"},
-                {name: "tasvibMagham", title: "شماره ثبت"},
-                {name: "gharardad", title: "تاریخ تاسیس"},
-                {name: "mablaghGharardad", title: "نوع ثبتی شرکت "},
-                {name: "mablagd", title: "سهام شرکت "},
+                {name: "nationalCode", title: "شناسه ملی شرکت"},
+                {name: "activityTopic", title: "موضوع فعالیت شرکت"},
+                {name: "registrationCode", title: "شماره ثبت"}
             ]
         };
         return headerInfo;
