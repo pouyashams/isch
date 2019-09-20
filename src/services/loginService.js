@@ -10,7 +10,7 @@ export async function login(username, password) {
     let accessToken = null;
     await axios({
         method: 'POST',
-        url: `http://shop.isuncharge.com/ISCHolding/api/auth/signin`,
+        url: `http://192.168.1.4:8090/ISCHolding/api/auth/signin`,
         headers: {
             'Content-Type': 'application/json',
         },
