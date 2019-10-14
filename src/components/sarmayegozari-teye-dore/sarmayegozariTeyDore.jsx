@@ -13,8 +13,14 @@ class deliveryInfoManagement extends Component {
             data: [{name:"pouya"},{name:"pouya"},{name:"pouya"},{name:"pouya"},{name:"pouya"},{name:"pouya"},{name:"pouya"},{name:"pouya"},{name:"pouya"},],
         };
         this.onAdd = this.onAdd.bind(this);
-    }
+        this.onBack = this.onBack.bind(this);
 
+    }
+    onBack() {
+        this.props.history.push({
+            pathname: '/sal-mali',
+        });
+    }
     //
     // async componentDidMount() {
     //     try {
@@ -114,10 +120,15 @@ class deliveryInfoManagement extends Component {
                         </div>
                     </div>
                     </div>
-                    <div className="col-12 p-4 text-center justify-content-center">
+                    <div className="row col-12 p-4 text-center justify-content-center">
                         <input type="button" className="btn btn-success" value="اضافه کردن" onClick={() => {
                             this.onAdd();
                         }}/>
+                        <div className="px-4 text-center justify-content-center">
+                            <input type="button" className="btn btn-danger" value="بازگشت" onClick={() => {
+                                this.onBack();
+                            }}/>
+                        </div>
                     </div>
                 </div>
 

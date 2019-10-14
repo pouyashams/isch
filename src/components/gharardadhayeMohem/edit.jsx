@@ -22,8 +22,14 @@ class editDeliveryInfo extends Component {
             makharejAnjamide: "",
             koleMakharej: "",
         };
-    }
+        this.onBack = this.onBack.bind(this);
 
+    }
+    onBack() {
+        this.props.history.push({
+            pathname: '/gharardadhaye-mohem',
+        });
+    }
     addData = () => {
         const data = this.state.data;
         data.push(
@@ -173,7 +179,7 @@ class editDeliveryInfo extends Component {
                             </div>
                             <div className="p-2">
                                 <input type="button" className="btn btn-danger" value="لغو"
-                                       onClick={this.addTime}/>
+                                       onClick={this.onBack}/>
                             </div>
                         </div>
                     </div> : null}

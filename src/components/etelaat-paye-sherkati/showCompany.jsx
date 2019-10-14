@@ -23,8 +23,15 @@ class showCompany extends Component {
             makharejAnjamide: "",
             koleMakharej: "",
         };
+        this.onBack = this.onBack.bind(this);
+
     }
 
+    onBack() {
+        this.props.history.push({
+            pathname: '/sal-mali',
+        });
+    }
     componentDidMount() {
 
         const {productInfo} = this.props.location;
@@ -283,7 +290,7 @@ class showCompany extends Component {
                     <div>
                         <div className=" row w-100 m-0 text-center justify-content-center align-items-center my-3">
                             <div className="p-2">
-                                <input type="button" className="btn btn-danger" value="بستن"
+                                <input type="button" className="btn btn-danger" value="بازگشت"
                                        onClick={this.closepage}/>
                             </div>
                         </div>

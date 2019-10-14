@@ -13,6 +13,8 @@ class deliveryInfoManagement extends Component {
             data: [],
         };
         this.onAdd = this.onAdd.bind(this);
+        this.onBack = this.onBack.bind(this);
+
     }
 
     //
@@ -45,6 +47,11 @@ class deliveryInfoManagement extends Component {
     // }
     //
 
+    onBack() {
+        this.props.history.push({
+            pathname: '/sal-mali',
+        });
+    }
 
     onAdd() {
         this.props.history.push({
@@ -83,10 +90,15 @@ class deliveryInfoManagement extends Component {
                 <div
                     className="rtl border bg-light shadow row w-100 m-0 py-4 px-2">
                     <SearchResult headerInfo={headerInfo} searchResultList={data} pageSize={pageSize}/>
-                    <div className="col-12 text-center justify-content-center">
-                    <input type="button" className="btn btn-success" value="اضافه کردن" onClick={() => {
+                    <div className="row col-12 text-center justify-content-center">
+                        <input type="button" className="btn btn-success" value="اضافه کردن" onClick={() => {
                             this.onAdd();
                         }}/>
+                        <div className="px-4 text-center justify-content-center">
+                            <input type="button" className="btn btn-danger" value="بازگشت" onClick={() => {
+                                this.onBack();
+                            }}/>
+                        </div>
                     </div>
 
                 </div>

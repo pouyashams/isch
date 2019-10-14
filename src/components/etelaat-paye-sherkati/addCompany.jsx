@@ -49,8 +49,15 @@ class editDeliveryInfo extends Component {
             inspector: "",
             auditCompany: "",
         };
+        this.onBack = this.onBack.bind(this);
     }
 
+
+    onBack() {
+        this.props.history.push({
+            pathname: '/etelaat-paye-sherkati',
+        });
+    }
     fillDateParameterValue = (value, name) => {
         this.setState({[name]: value});
     };
@@ -475,6 +482,10 @@ class editDeliveryInfo extends Component {
                             <div className="p-2">
                                 <input type="button" className="btn btn-warning" value="افزودن هیات مدیره"
                                        onClick={this.addBoardOfDirectors}/>
+                            </div>
+                            <div className="p-2">
+                                <input type="button" className="btn btn-danger" value="لغو"
+                                       onClick={this.onBack}/>
                             </div>
                         </div>
                     </div>
