@@ -1,169 +1,20 @@
 import React, {Component} from 'react'
-// import {toast} from 'react-toastify';
-import SearchResult from "../search/search-result"
+import Table from "./table"
 import {withRouter} from 'react-router-dom';
 
 class deliveryInfoManagement extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            pageSize: 20,
-            data: [
-                {
-                    name: "درآمد حاصل از فروش کالا / ارائه خدمات",
-                    id: 0
-                }, {
-                    name: "وصول مطالبات",
-                    id: 1
-                }, {
-                    name: "فروش دارایی های غیر جاری",
-                    id: 2
-                }, {
-                    name: "افزایش سرمایه (نقدی)",
-                    id: 3
-                }, {
-                    name: "درامد غیر عملیاتی",
-                    id: 4
-                }, {
-                    name: "سایر دریافت ها",
-                    id: 5
-                },
-                {
-                    name: <label className="font-weight-bold">جمع دریافت ها</label>,
-                    id: 6
-                },
-                {
-                    name: "خرید کالا/مواد/لوازم یدکی/...",
-                    id: 7
-                },
-                {
-                    name: "هزینه های دستمزد و سربار (مستقیم و غیر مستقیم)",
-                    id: 8
-                },
-                {
-                    name: "هزینه های فروش ، اداری و مالی و عمومی",
-                    id: 9
-                },
-                {
-                    name: "پرداخت بدهی های دوره قبل",
-                    id: 10
-                },
-                {
-                    name: "پرداخت مخارج سرمایه ای ",
-                    id: 11
-                },
-                {
-                    name: "پرداخت سود سهام",
-                    id: 12
-                },
-                {
-                    name: "پرداخت مالیات",
-                    id: 13
-                },
-                {
-                    name: "هزینه های غیر عملیاتی",
-                    id: 14
-                },
-                {
-                    name: "سایر پرداخت ها",
-                    id: 15
-                },
-                {
-                    name: <label className="font-weight-bold">جمع پرداخت ها</label>,
-                    id: 16
-                },
-                {
-                    name: <label className="font-weight-bold">مازاد(کسری) دریافتها نسبت به پرداخت ها</label>,
-                    id: 17
-                },
-                {
-                    name: <label className="font-weight-bold">موجودی نقد ابتدای دوره</label>,
-                    id: 18
-                },
-                {
-                    name: <label className="font-weight-bold">موجودی نقد پایان دوره</label>,
-                    id: 19
-                },
-            ],
-            dataInfo: [
-                {
-                    name: "درآمد حاصل از فروش کالا / ارائه خدمات",
-                    id: 0
-                }, {
-                    name: "وصول مطالبات",
-                    id: 1
-                }, {
-                    name: "فروش دارایی های غیر جاری",
-                    id: 2
-                }, {
-                    name: "افزایش سرمایه (نقدی)",
-                    id: 3
-                }, {
-                    name: "درامد غیر عملیاتی",
-                    id: 4
-                }, {
-                    name: "سایر دریافت ها",
-                    id: 5
-                },
-                {
-                    name: <label className="font-weight-bold">جمع دریافت ها</label>,
-                    id: 6
-                },
-                {
-                    name: "خرید کالا/مواد/لوازم یدکی/...",
-                    id: 7
-                },
-                {
-                    name: "هزینه های دستمزد و سربار (مستقیم و غیر مستقیم)",
-                    id: 8
-                },
-                {
-                    name: "هزینه های فروش ، اداری و مالی و عمومی",
-                    id: 9
-                },
-                {
-                    name: "پرداخت بدهی های دوره قبل",
-                    id: 10
-                },
-                {
-                    name: "پرداخت مخارج سرمایه ای ",
-                    id: 11
-                },
-                {
-                    name: "پرداخت سود سهام",
-                    id: 12
-                },
-                {
-                    name: "پرداخت مالیات",
-                    id: 13
-                },
-                {
-                    name: "هزینه های غیر عملیاتی",
-                    id: 14
-                },
-                {
-                    name: "سایر پرداخت ها",
-                    id: 15
-                },
-                {
-                    name: <label className="font-weight-bold">جمع پرداخت ها</label>,
-                    id: 16
-                },
-                {
-                    name: <label className="font-weight-bold">مازاد(کسری) دریافتها نسبت به پرداخت ها</label>,
-                    id: 17
-                },
-                {
-                    name: <label className="font-weight-bold">موجودی نقد ابتدای دوره</label>,
-                    id: 18
-                },
-                {
-                    name: <label className="font-weight-bold">موجودی نقد پایان دوره</label>,
-                    id: 19
-                },
-            ],
-        };
+        this.state = {};
+        this.onBack = this.onBack.bind(this);
+
+    }
+
+    onBack() {
+        this.props.history.push({
+            pathname: '/sal-mali',
+        });
     }
 
     //
@@ -197,25 +48,2049 @@ class deliveryInfoManagement extends Component {
     //
 
 
-    getResultTableHeader() {
-        let headerInfo = {
-            showCheckBox: false,
-            actions: [],
-            headerTitleInfos: [
-                {name: "name", title: "شرح"},
-                {name: "mozuProje", title: "عملکرد دوره جاری"},
-                {name: "sefareshDahnde", title: "عملکرد واقعی تاکنون"},
-                {name: "sefareshDahnde", title: "بودجه مصوب"},
-                {name: "sefareshDahnde", title: "بودجه تعدیل شده"},
-                {name: "sefareshDahnde", title: "درصد پوشش"},
-            ]
-        };
-        return headerInfo;
-    }
-
     render() {
-        const headerInfo = this.getResultTableHeader();
-        const {data,dataInfo, pageSize} = this.state;
+        const data = [
+            {
+                name: "درآمد حاصل از فروش کالا / ارائه خدمات",
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+            },
+
+            {
+                name: "وصول مطالبات",
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+
+            },
+
+            {
+                name: "فروش دارایی های غیر جاری",
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+            },
+
+            {
+                name: "افزایش سرمایه (نقدی)",
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+            },
+
+            {
+                name: "درامد غیر عملیاتی",
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+
+            },
+
+            {
+                name: <label className="font-weight-bold">جمع دریافت ها</label>,
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+
+            },
+
+            {
+                name: "خرید کالا/مواد/لوازم یدکی/...",
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+
+            },
+
+            {
+                name: "هزینه های دستمزد و سربار (مستقیم و غیر مستقیم)",
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+
+            },
+
+            {
+                name: "هزینه های فروش ، اداری و مالی و عمومی",
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+
+            },
+            {
+                name: "پرداخت بدهی های دوره قبل",
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+
+            },
+
+            {
+                name: "پرداخت مخارج سرمایه ای ",
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+
+            },
+
+            {
+                name: "پرداخت سود سهام",
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+
+            },
+            {
+                name: "پرداخت مالیات",
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+
+            },
+            {
+                name: "هزینه های غیر عملیاتی",
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+
+            },
+            {
+                name: "سایر پرداخت ها",
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+
+            },
+            {
+                name: <label className="font-weight-bold">جمع پرداخت ها</label>,
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+
+            },
+            {
+                name: <label className="font-weight-bold">مازاد(کسری) دریافتها نسبت به پرداخت ها</label>,
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+
+            },
+            {
+                name: <label className="font-weight-bold">موجودی نقد ابتدای دوره</label>,
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+
+            },
+            {
+                name: <label className="font-weight-bold">موجودی نقد پایان دوره</label>,
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+
+            },
+        ];
+        const dataInfo = [
+            {
+                name: "درآمد حاصل از فروش کالا / ارائه خدمات",
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+            },
+
+            {
+                name: "وصول مطالبات",
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+
+            },
+
+            {
+                name: "فروش دارایی های غیر جاری",
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+            },
+
+            {
+                name: "افزایش سرمایه (نقدی)",
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+            },
+
+            {
+                name: "درامد غیر عملیاتی",
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+
+            },
+            {
+                name: "سایر دریافت ها",
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+
+            },
+
+            {
+                name: <label className="font-weight-bold">جمع دریافت ها</label>,
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+
+            },
+
+            {
+                name: "خرید کالا/مواد/لوازم یدکی/...",
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+
+            },
+
+            {
+                name: "هزینه های دستمزد و سربار (مستقیم و غیر مستقیم)",
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+
+            },
+
+            {
+                name: "هزینه های فروش ، اداری و مالی و عمومی",
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+
+            },
+
+            {
+                name: "پرداخت مخارج سرمایه ای ",
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+
+            },
+
+            {
+                name: "پرداخت سود سهام",
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+
+            },
+            {
+                name: "پرداخت مالیات",
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+
+            },
+            {
+                name: "هزینه های غیر عملیاتی",
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+
+            },
+            {
+                name: "سایر پرداخت ها",
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+
+            },
+            {
+                name: <label className="font-weight-bold">جمع پرداخت ها</label>,
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+
+            },
+            {
+                name: <label className="font-weight-bold">مازاد(کسری) دریافتها نسبت به پرداخت ها</label>,
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+
+            },
+            {
+                name: <label className="font-weight-bold">موجودی نقد ابتدای دوره</label>,
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+
+            },
+            {
+                name: <label className="font-weight-bold">موجودی نقد پایان دوره</label>,
+                dore: <div className="col-12">
+                    <input className="form-control text-center"
+                           type="input"
+                           step="any"
+                           placeholder=""
+                        // value={this.state.baharDescription}
+                           onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                    />
+                </div>,
+                vaghe:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                budje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                moghayeseBudje:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+                furusj:
+                    <div className="col-12">
+                        <input className="form-control text-center"
+                               type="input"
+                               step="any"
+                               placeholder=""
+                            // value={this.state.baharDescription}
+                               onChange={(e) => this.fillParameterValue(e.target.value, "baharDescription")}
+                        />
+                    </div>,
+
+            },
+        ];
+
+        const headerTitleInfos = [
+            {name: "name", title: "شرح"},
+            {name: "dore", title: "عملکرد دوره جاری"},
+            {name: "vaghe", title: "عملکرد واقعی تاکنون"},
+            {name: "budje", title: "بودجه مصوب"},
+            {name: "moghayeseBudje", title: "بودجه تعدیل شده"},
+            {name: "furusj", title: "بودجه تعدیل شده"},
+        ];
+
         return (
             <div
                 className="rtl border bg-light shadow row w-100 m-0 text-center justify-content-center align-items-center my-3">
@@ -225,14 +2100,36 @@ class deliveryInfoManagement extends Component {
                 <div className="rtl border bg-light shadow row w-100 m-0 py-4 px-2">
 
                     <h5 className="font-weight-bold p-4 ">دوره سه ماهه منتهی به (دوره جاری) :</h5>
-                    <SearchResult headerInfo={headerInfo} searchResultList={data} pageSize={pageSize}/>
+                    <Table
+                        data={data}
+                        headerTitleInfos={headerTitleInfos}
+                    />
+                    {/*<SearchResult headerInfo={headerInfo} searchResultList={data} pageSize={pageSize}/>*/}
                 </div>
                 <div
                     className="rtl border bg-light shadow row w-100 m-0 py-4 px-2">
                     <h5 className="font-weight-bold p-4 ">دوره سه ماهه مشابه (سال قبل) :</h5>
 
-
-                    <SearchResult headerInfo={headerInfo} searchResultList={dataInfo} pageSize={pageSize}/>
+                    <Table
+                        data={dataInfo}
+                        headerTitleInfos={headerTitleInfos}
+                    />
+                    {/*<SearchResult headerInfo={headerInfo} searchResultList={dataInfo} pageSize={pageSize}/>*/}
+                </div>
+                <div>
+                    <div className=" row w-100 m-0 text-center justify-content-center align-items-center my-3">
+                        <div className="p-2">
+                            <input type="button" className="btn btn-success" value="ذخیره"
+                                   onClick={() => {
+                                       this.addSalMali();
+                                   }}/>
+                        </div>
+                        <div className="p-2">
+                            <input type="button" className="btn btn-danger" value="بازگشت"
+                                   onClick={this.onBack}
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
         );

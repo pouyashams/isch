@@ -54,7 +54,7 @@ const navLinks = [
     //     name: "اطلاعات پایه شرکت ها",
     //     icon: "fa fa-sliders",
     // },
-    // {
+    // {x
     //     path: "/mosvabat-heyat-modire",
     //     name: "مصوبات هیات مدیره",
     //     icon: "fa fa-sliders",
@@ -76,7 +76,8 @@ const navLinks = [
     //     path: "/soud-ziyan-dore",
     //     name: "صورت سود و زیان دوره",
     //     icon: "fa fa-sliders",
-    // },{
+    // },
+    // {
     //     path: "/sarmayegozari-tey-dore",
     //     name: "سرمایه گذاری طی دوره",
     //     icon: "fa fa-sliders",

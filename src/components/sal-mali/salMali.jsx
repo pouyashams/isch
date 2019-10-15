@@ -35,7 +35,7 @@ class salMali extends Component {
                 data: [
                     {
                         year: 1397,
-                        description: "پویا شمسی پویا شمسی پویا شمسی پویا شمسی پویا شمسی پویا شمسی پویا شمسی",
+                        description: "پویا شمسی پویا شمسی پویا شمسی پویا شمسی پویا شمسی پویا شمسی پویا شمسی پویا شمسی پویا شمسی پویا شمسی پویا شمسی پویا شمسی پویا شمسی پویا شمسی پویا شمسی پویا شمسی پویا شمسی پویا شمسی پویا شمسی پویا شمسی پویا شمسی پویا شمسی پویا شمسی پویا شمسی پویا شمسی پویا شمسی ",
                         status: <h7 className="text-success font-weight-bold  ">فعال</h7>,
                         baharDescription: "p[oefjrvugbiydhvbfcojdpkxos",
                         baharStatus:"فعال"

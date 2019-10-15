@@ -3,6 +3,8 @@ import React, {Component} from 'react'
 import "../../css/textArea.css"
 import SearchResult from "../search/search-result"
 import {withRouter} from 'react-router-dom';
+import Table from "./table"
+
 
 class deliveryInfoManagement extends Component {
 
@@ -10,59 +12,15 @@ class deliveryInfoManagement extends Component {
         super(props);
         this.state = {
             pageSize: 12,
-            data: [
-                {
-                    identifier:0,
-                    name:"زمین"
-                },
-                {
-                    identifier:1,
-                    name:"ساختمان و مستحدثات"
-                },
-                {
-                    identifier:2,
-                    name:"تاسیسات"
-                },
-                {
-                    identifier:3,
-                    name:"وسایل نقلیه"
-                },
-                {
-                    identifier:4,
-                    name:"اثاثیه و منصوبات"
-                },
-                {
-                    identifier:5,
-                    name:"تجهیزات وماشین آلات"
-                },
-                {
-                    identifier:6,
-                    name:"دارایی در جریان تکمیل"
-                },
-                {
-                    identifier:7,
-                    name:"جمع دارایی های ثابت مشهود"
-                },
-                {
-                    identifier:8,
-                    name:"حق الامتیازها"
-                },
-                {
-                    identifier:9,
-                    name:"نرم افزارهای رایانه ای"
-                },
-                {
-                    identifier:10,
-                    name:"سایر"
-                },
-                {
-                    identifier:11,
-                    name:"جمع دراریی های نامشهد"
-                },
-            ],
         };
-    }
+        this.onBack = this.onBack.bind(this);
 
+    }
+    onBack() {
+        this.props.history.push({
+            pathname: '/sal-mali',
+        });
+    }
     //
     // async componentDidMount() {
     //     try {
@@ -93,37 +51,55 @@ class deliveryInfoManagement extends Component {
     // }
     //
 
-    getResultTableHeader() {
-        let headerInfo = {
-            showCheckBox: false,
-            actions: [],
-            headerTitleInfos: [
-                {name: "name", title: " نوع دارایی  های  طی دوره"},
-                {name: "mozuProje", title: "خرید طی دوره"},
-                {name: "sefareshDahnde", title: "خرید از ابتدای سال تاکنون"},
-                {name: "tasvibMagham", title: "بودجه مصوب سال"},
-                {name: "gharardad", title: "مقایسه واقعی با بودجه مصوب"},
-                {name: "mablaghGharardad", title: "فروش طی دوره"},
-                {name: "mablaghGharardad", title: "نحوه تصویب توسط مقامات ذی صلاح مطابق آیین نامه معاملات"},
-            ]
-        };
-        return headerInfo;
-    }
+
 
     render() {
-        const headerInfo = this.getResultTableHeader();
-        const {data, pageSize} = this.state;
+        const headerTitleInfos =[
+            {name: "name", title: " نوع دارایی  های  طی دوره"},
+            {name: "dore", title: "خرید طی دوره"},
+            {name: "kharid", title: "خرید از ابتدای سال تاکنون"},
+            {name: "budje", title: "بودجه مصوب سال"},
+            {name: "moghayeseBudje", title: "مقایسه واقعی با بودجه مصوب"},
+            {name: "furusj", title: "فروش طی دوره"},
+            {name: "tasvib", title: "نحوه تصویب توسط مقامات ذی صلاح مطابق آیین نامه معاملات"},
+        ]
         return (
             <div
                 className="rtl border bg-light shadow row w-100 m-0 text-center justify-content-center align-items-center my-3">
                 <div className="col-12 justify-content-center align-items-center text-center header-box text-light">
                     <h4 className="py-2">خرید و فروش  دارایی های ثابت</h4>
                 </div>
-                <div
-                    className="rtl border bg-light shadow row w-100 m-0 py-4 px-2">
-                    <SearchResult headerInfo={headerInfo} searchResultList={data} pageSize={pageSize}/>
+
+
+                    <div className="col-12 justify-content-center align-items-center text-center">
+                        <div className="rtl border m-0  shadow  row w-100 justify-content-center my-3 pb-3">
+
+                            <div className="   justify-content-center py-3 col-11">
+                                <Table
+                                    headerTitleInfos={headerTitleInfos}
+                                />
+                            </div>
+
+
+                        </div>
+
+                        <div>
+                            <div className=" row w-100 m-0 text-center justify-content-center align-items-center my-3">
+                                <div className="p-2">
+                                    <input type="button" className="btn btn-success" value="ذخیره"
+                                           onClick={() => {
+                                               this.addSalMali();
+                                           }}/>
+                                </div>
+                                <div className="p-2">
+                                    <input type="button" className="btn btn-danger" value="بازگشت"
+                                           onClick={this.onBack}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
         );
     }
 }
