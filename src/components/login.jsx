@@ -10,7 +10,6 @@ class Login extends Component {
 
     handleSubmit = async e => {
         e.preventDefault();
-
         try {
             const access_token = await login(this.state.username, this.state.password);
             if (access_token !== null) {

@@ -6,8 +6,8 @@ axios.interceptors.request.use(async function (config) {
     console.log(config)
     if (!config.url.includes("/api/auth/signin")) {
         const token = sessionStorage.getItem('token');
-        console.log(token)
-        axios.defaults.headers.common = {'Authorization': `bearer ${token}`}
+        config.headers.Authorization = `Bearer ${token}`;
+        axios.defaults.headers.common.Authorization = `Bearer ${token}`;
     }
     return config;
 }, function (error) {
