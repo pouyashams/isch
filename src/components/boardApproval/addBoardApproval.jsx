@@ -1,40 +1,44 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
-// import {toast} from 'react-toastify';
 import SearchResult from "../search/search-result"
-
 import DatePicker from "../SimpleDatePicker";
 import "../../css/textArea.css"
+import {toast} from "react-toastify";
+import {addBoardApprovals} from "../../services/boardApprovalService";
 
-class editDeliveryInfo extends Component {
+class addBoardApproval extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             pageSize: 5,
             data: [],
-            name: "",
-            mozuProje: "",
-            sefareshDahnde: "",
-            tasvibMagham: "",
-            gharardad: "",
-            mablaghGharardad: "",
-            daramdShenasayi: "",
-            darsadPishraft: "",
-            makharejAnjamide: "",
-            koleMakharej: "",
+            date: "",
+            operationalDate: "",
+            details: "",
+            actions: "",
+            fiscalMonthId: "",
+
         };
         this.onBack = this.onBack.bind(this);
+        this.fillParameterValue = this.fillParameterValue.bind(this);
 
     }
+
     onBack() {
         this.props.history.push({
-            pathname: '/mosvabat-heyat-modire',
+            pathname: '/board-approval',
+            dataInfo: this.state.fiscalMonthId,
         });
     }
 
     fillParameterValue = (value, name) => {
         this.setState({[name]: value});
+    };
+    componentDidMount() {
+        const {dataInfo} = this.props.location;
+        if (!dataInfo) return this.props.history.push('/fiscal-year');
+        this.setState({fiscalMonthId: dataInfo});
     };
 
     getResultTableHeader() {
@@ -42,43 +46,56 @@ class editDeliveryInfo extends Component {
             showCheckBox: false,
             actions: [],
             headerTitleInfos: [
-                {name: "name", title: "تاریخ مصوبه"},
-                {name: "mozuProje", title: "شرح مصوبه هیات مدیره"},
-                {name: "sefareshDahnde", title: "اقدامات انجام شده"},
-                {name: "sefareshDahnde", title: "تاریخ انجام"},
+                {name: "date", title: "تاریخ مصوبه"},
+                {name: "details", title: "شرح مصوبه هیات مدیره"},
+                {name: "actions", title: "اقدامات انجام شده"},
+                {name: "operationalDate", title: "تاریخ انجام"},
             ]
         };
         return headerInfo;
     }
-    addData = () => {
+
+    addData = async () => {
         const data = this.state.data;
         data.push(
             {
-                name: this.state.name,
-                gharardad: this.state.gharardad,
-                tasvibMagham: this.state.tasvibMagham,
-                sefareshDahnde: this.state.sefareshDahnde,
-                mozuProje: this.state.mozuProje,
-                mablaghGharardad: this.state.mablaghGharardad,
-                daramdShenasayi: this.state.daramdShenasayi,
-                darsadPishraft: this.state.darsadPishraft,
-                makharejAnjamide: this.state.makharejAnjamide,
-                koleMakharej: this.state.koleMakharej,
+                date: this.state.date,
+                operationalDate: this.state.operationalDate,
+                details: this.state.details,
+                actions: this.state.actions,
+
             }
         );
+        console.log(data,12345);
         this.setState({data});
-        this.setState({
-            name: "",
-            mozuProje: "",
-            sefareshDahnde: "",
-            tasvibMagham: "",
-            gharardad: "",
-            mablaghGharardad: "",
-            daramdShenasayi: "",
-            darsadPishraft: "",
-            makharejAnjamide: "",
-            koleMakharej: "",
-        });
+
+
+        const allData = {
+            fiscalMonth: {
+                id: this.state.fiscalMonthId
+            },
+            date: this.state.date,
+            operationalDate: this.state.operationalDate,
+            details: this.state.details,
+            actions: this.state.actions,
+        };
+        try {
+            const result = await addBoardApprovals(allData);
+            if (result.status === 200) {
+                toast.success('عملیات با موفقیت انجام شد.');
+                this.setState({
+                    date: "",
+                    operationalDate: "",
+                    details: "",
+                    actions: "",
+                });
+            }
+        } catch (ex) {
+            if (ex.response && ex.response.status === 400) {
+                toast.error('خطایی در دریافت اطلاعات رخ داده است.');
+            }
+        }
+        document.getElementById("loading").style.display = "none";
     };
 
 
@@ -99,41 +116,45 @@ class editDeliveryInfo extends Component {
                         <div className="form-group  py-2 px-4 col-12 col-sm-6 col-md-3 float-right">
                             <label>تاریخ مصوبه :</label>
                             <DatePicker
-                                name={""}
-                                // value={""}
+                                name={"date"}
+                                value={this.state.date}
                                 placeholder="---"
-                                // onChange={(e) => this.fillParameterValue(e.target.value, e.target.name)}
+                                onChange={this.fillParameterValue}
                             />
                         </div>
                         <div className="form-group py-2  col-12 col-sm-6 col-md-3 float-right">
                             <label>تاریخ انجام :</label>
                             <DatePicker
-                                name={""}
-                                // value={""}
+                                name={"operationalDate"}
+                                value={this.state.operationalDate}
                                 placeholder="---"
-                                // onChange={(e) => this.fillParameterValue(e.target.value, e.target.name)}
+                                onChange={this.fillParameterValue}
                             />
                         </div>
                         <div className="form-group col-12 px-4 float-right">
-                            <label>شرح مصوبه هیات مدیره	 :</label>
+                            <label>شرح مصوبه هیات مدیره :</label>
                             <textarea className="col-5 form-control text-center  "
-                                // value={""}
-                                      name={"description"}
+                                      value={this.state.details}
+                                      name={"details"}
                                       onChange={(e) => this.fillParameterValue(e.target.value, e.target.name)}
                             />
                         </div>
                         <div className="form-group col-12 px-4 float-right">
                             <label>اقدامات انجام شده :</label>
                             <textarea className="col-5 form-control text-center  "
-                                // value={""}
-                                      name={"description"}
+                                      value={this.state.actions}
+                                      name={"actions"}
                                       onChange={(e) => this.fillParameterValue(e.target.value, e.target.name)}
                             />
                         </div>
                         <div className=" row w-100 m-0 text-center justify-content-center align-items-center my-3">
-                            <div >
+                            <div>
                                 <input type="button" className="btn btn-warning" value="افزودن"
                                        onClick={this.addData}/>
+                            </div>
+                            <div className="p-2">
+                                <input type="button" className="btn btn-danger" value="بازگشت"
+                                       onClick={this.onBack}/>
                             </div>
                         </div>
                     </div>
@@ -143,16 +164,6 @@ class editDeliveryInfo extends Component {
                                 className="rtl border bg-light shadow row w-100 m-0 py-4 px-2">
                                 <SearchResult headerInfo={headerInfo} searchResultList={data} pageSize={pageSize}/>
                             </div>
-                            <div className=" row w-100 m-0 text-center justify-content-center align-items-center my-3">
-                                <div className="p-2">
-                                    <input type="button" className="btn btn-success" value="اضافه کردن"
-                                           onClick={this.sendDataTimeInfo}/>
-                                </div>
-                                <div className="p-2">
-                                    <input type="button" className="btn btn-danger" value="لغو"
-                                           onClick={this.onBack}/>
-                                </div>
-                            </div>
                         </div> : null
                     }
                 </div>
@@ -161,4 +172,4 @@ class editDeliveryInfo extends Component {
     }
 }
 
-export default withRouter(editDeliveryInfo);
+export default withRouter(addBoardApproval);

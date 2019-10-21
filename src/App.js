@@ -5,8 +5,8 @@ import Sidebar from './components/common/sidebar';
 import Footer from './components/common/footer';
 import {PrivateRoute} from "./components/privateroute";
 import {ToastContainer} from "react-toastify";
-import vaziyatProjeAmaliyati from "./components/vaziyat-proje-amaliyati/vaziyat-proje-amaliyati";
-import editVaziyatProjeAmaliyati from "./components/vaziyat-proje-amaliyati/edit";
+import vaziyatProjeAmaliyati from "./components/operationalProject/operationalProject";
+import editVaziyatProjeAmaliyati from "./components/operationalProject/addOperationalProject";
 import editTarkibDarayi from "./components/tarkib-darayi/edit";
 import TarkibDarayi from "./components/tarkib-darayi/tarkib-darayi";
 
@@ -28,8 +28,8 @@ import showCompany from "./components/etelaat-paye-sherkati/showCompany";
 import editCompany from "./components/etelaat-paye-sherkati/editCompany";
 import staffStatus from "./components/staff-status/staff-status";
 import statusOfConsultants from "./components/status-of-consultants/statusOfConsultants";
-import mosavabatHeyatModire from "./components/mosavabat-heyat-modire/mosavabatHeyatModire";
-import addMosavabatHeyatModire from "./components/mosavabat-heyat-modire/edit";
+import mosavabatHeyatModire from "./components/boardApproval/boardApproval";
+import addMosavabatHeyatModire from "./components/boardApproval/addBoardApproval";
 import vaziatTahodatGhanuni from "./components/vaziyat-tahodat-ghanuni/vaziatTahodatGhanuni";
 import addVaziatTahodatGhanuni from "./components/vaziyat-tahodat-ghanuni/edit";
 import kharidFurushDarayihayeSabet from "./components/kharid-furush-darayihaye-sabet/kharidFurushDarayihayeSabet";
@@ -39,15 +39,17 @@ import sarmayegozariTeyDore from "./components/sarmayegozari-teye-dore/sarmayego
 import addSarmayegozariTeyDore from "./components/sarmayegozari-teye-dore/edit";
 import soudSahamMosavab from "./components/soud-saham-mosavab/soudSahamMosavab";
 import addSoudSahamMosavab from "./components/soud-saham-mosavab/edit";
-import modiriyatSalMali from "./components/modiriyat-sal-mali/modiriyatSalMali";
-import addSalMali from "./components/modiriyat-sal-mali/addSalMali";
-import editSalMali from "./components/modiriyat-sal-mali/editSalMali";
+import modiriyatSalMali from "./components/manageFiscalYear/manageFiscalYear";
+import addSalMali from "./components/manageFiscalYear/addFiscalYear";
+import editSalMali from "./components/manageFiscalYear/editFiscalYear";
 
-import salMali from "./components/sal-mali/salMali";
-import clientAddSalMali from "./components/sal-mali/clientAddSalMali";
+import salMali from "./components/fiscalYear/fiscalYear";
+import clientAddSalMali from "./components/fiscalYear/fiscalYearDetails";
 
-import forms from "./components/sal-mali/forms";
-import faslMaliTable from "./components/sal-mali/fasl-mali-table";
+import forms from "./components/fiscalYear/forms";
+import editFiscalYearDetails from "./components/manageFiscalYear/editFiscalYearDetails";
+import editOperationalProject from "./components/operationalProject/editOperationalProject";
+import editBoardApproval from "./components/boardApproval/editBoardApproval";
 
 class App extends Component {
     render() {
@@ -63,9 +65,9 @@ class App extends Component {
                     >
                         <Router history={this.props.history}>
                             <Switch>
-                                <PrivateRoute path="/vaziyat-prozhe-amaliyati" exact={false}
+                                <PrivateRoute path="/operational-project" exact={false}
                                               component={vaziyatProjeAmaliyati}/>
-                                <PrivateRoute path="/add-vaziyat-prozhe-amaliyati" exact={false}
+                                <PrivateRoute path="/add-operational-project" exact={false}
                                               component={editVaziyatProjeAmaliyati}/>
 
                                 <PrivateRoute path="/tarkib-darayi" exact={false} component={TarkibDarayi}/>
@@ -100,9 +102,9 @@ class App extends Component {
                                 <PrivateRoute path="/staff-status" exact={false} component={staffStatus}/>
                                 <PrivateRoute path="/status-of-consultants" exact={false}
                                               component={statusOfConsultants}/>
-                                <PrivateRoute path="/mosvabat-heyat-modire" exact={false}
+                                <PrivateRoute path="/board-approval" exact={false}
                                               component={mosavabatHeyatModire}/>
-                                <PrivateRoute path="/add-mosvabat-heyat-modire" exact={false}
+                                <PrivateRoute path="/add-board-approval" exact={false}
                                               component={addMosavabatHeyatModire}/>
 
                                 <PrivateRoute path="/vaziyat-tahodat-ghanuni" exact={false}
@@ -124,16 +126,20 @@ class App extends Component {
                                               component={addSoudSahamMosavab}/>
 
 
-                                <PrivateRoute path="/modiriyat-sal-mali" exact={false} component={modiriyatSalMali}/>
+                                <PrivateRoute path="/manage-fiscal-year" exact={false} component={modiriyatSalMali}/>
                                 <PrivateRoute path="/add-sal-mali" exact={false} component={addSalMali}/>
-                                <PrivateRoute path="/edit-sal-mali" exact={false} component={editSalMali}/>
+                                <PrivateRoute path="/edit-fiscal-year" exact={false} component={editSalMali}/>
 
-                                <PrivateRoute path="/sal-mali" exact={false} component={salMali}/>
-                                <PrivateRoute path="/client-add-sal-mali" exact={false} component={clientAddSalMali}/>
+                                <PrivateRoute path="/fiscal-year" exact={false} component={salMali}/>
+                                <PrivateRoute path="/fiscal-year-details" exact={false} component={clientAddSalMali}/>
 
-                                <PrivateRoute path="/client-add-sal-mali" exact={false} component={clientAddSalMali}/>
+                                <PrivateRoute path="/fiscal-year-details" exact={false} component={clientAddSalMali}/>
 
                                 <PrivateRoute path="/forms" exact={false} component={forms}/>
+                                <PrivateRoute path="/edit-fiscal-year-details" exact={false} component={editFiscalYearDetails}/>
+                                <PrivateRoute path="/edit-operational-project" exact={false} component={editOperationalProject}/>
+
+                                <PrivateRoute path="/edi-board-approval" exact={false} component={editBoardApproval}/>
 
                                 <PrivateRoute path="/" exact={true} component={telaatPayeSherkati}/>
 

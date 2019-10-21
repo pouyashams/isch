@@ -1,49 +1,56 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
-import FaslMaliTable from "./fasl-mali-table"
+import SearchResult from "../search/search-result"
+import {toast} from 'react-toastify';
+import {updateFicalYear} from "../../services/fiscalYearService";
 
 
-class editDeliveryInfo extends Component {
+class editFiscalYear extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             pageSize: 5,
+            seasonData: [],
             year: "",
-            status: "active",
+            statusCode: "",
+            statusName: "",
             description: "",
-            payizDescription: "",
-            tabestanStatus: "",
-            tabestanDescription: "",
-            baharStatus: "",
-            baharDescription: "",
-            zemestanStatus: "",
-            zemestanDescription: "",
-            payizStatus: "",
-            init: false
+            id: "",
         };
+        this.onEdit = this.onEdit.bind(this);
     }
 
     async componentDidMount() {
         const {dataInfo} = this.props.location;
-        if (!dataInfo) return this.props.history.push('/modiriyat-sal-mali');
+        if (!dataInfo) return this.props.history.push('/manage-fiscal-year');
+        const seasonData = [];
+        dataInfo.fiscalMonthList.forEach((data) => {
+            seasonData.push(
+                {
+                    description: data.description,
+                    identifier: data.identifier,
+                    sessionName: data.session.name,
+                    sessionCode: data.session.code,
+                    statusCode: data.status.code,
+                    statusName: data.status.name,
+                    dataInfo: dataInfo,
+                }
+            )
+        });
         this.setState({
+            seasonData,
             year: dataInfo.year,
-            status: dataInfo.status,
+            statusCode: dataInfo.statusCode,
+            statusName: dataInfo.statusName,
             description: dataInfo.description,
-            baharDescription: dataInfo.baharDescription,
-            baharStatus: dataInfo.baharStatus,
-            tabestanDescription: dataInfo.tabestanDescription,
-            tabestanStatus: dataInfo.tabestanStatus,
-            payizDescription: dataInfo.payizDescription,
-            payizStatus: dataInfo.payizStatus,
-            zemestanDescription: dataInfo.zemestanDescription,
-            zemestanStatus: dataInfo.zemestanStatus,
-            init: true
+            id: dataInfo.identifier,
         });
     }
 
     fillParameterValue = (value, name) => {
+        console.log(value)
+        console.log(name)
         this.setState({[name]: value});
 
     };
@@ -53,23 +60,88 @@ class editDeliveryInfo extends Component {
         return data;
     };
     cancel = () => {
-        this.props.history.push('/modiriyat-sal-mali')
+        this.props.history.push('/manage-fiscal-year')
     };
-    addSalMali = () => {
+    updateFiscalYear = async () => {
+        const dataInfo=[];
+        console.log(this.state.seasonData,122121)
+        this.state.seasonData.forEach((info) => {
+
+            dataInfo.push({
+                identifier:info.identifier,
+                description:info.description,
+                status: {
+                    code: info.statusCode,
+                },
+                session: {
+                    code: info.sessionCode,
+                },
+            })
+        });
         const data = {
-            description: this.state.description,
-            status: this.state.status,
-            year: this.state.year,
-            seasonData: this.returnFile()
+
+                identifier: this.state.id,
+                year: this.state.year,
+                description: this.state.description,
+                status: {
+                    code: this.state.statusCode,
+                },
+                fiscalMonthList: dataInfo,
+
+            }
+        ;
+        console.log(data, "Shaams");
+        try {
+            const result = await updateFicalYear(data);
+            if (result.status === 200) {
+                toast.success('عملیات با موفقیت انجام شد.');
+            }
+        } catch (ex) {
+            if (ex.response && ex.response.status === 400) {
+                toast.error('خطایی در دریافت اطلاعات رخ داده است.');
+            }
+        }
+        document.getElementById("loading").style.display = "none";
+    }
+    ;
+
+    getResultTableHeader() {
+        let headerInfo = {
+            showCheckBox: false,
+            actions: [
+                {
+                    name: 'edit',
+                    title: 'ویرایش',
+                    icon: 'fa fa-th-list',
+                    style: 'btn btn-primary btn-xs',
+                    onclick: this.onEdit
+                },
+            ],
+            headerTitleInfos: [
+                {name: "sessionName", title: "سال"},
+                {name: "description", title: "توضیحات"},
+                {name: "statusName", title: "وضعیت"},
+            ]
         };
-    };
+        return headerInfo;
+    }
+
+    onEdit(searchResult) {
+        this.props.history.push({
+            pathname: '/edit-fiscal-year-details',
+            dataInfo: searchResult
+
+        });
+    }
+
 
     render() {
-        const option = [{value: "active ", title: "فعال ", selected: true}, {
-            value: "deActive ",
-            title: " غیر فعال ",
-            selected: false
-        }];
+        const headerInfo = this.getResultTableHeader();
+        const {seasonData, pageSize} = this.state;
+        const option = [
+            {value: "active ", title: "فعال ", selected: true},
+            {value: "deActive ", title: " غیر فعال ", selected: false}
+        ];
         return (
 
             <div
@@ -94,8 +166,8 @@ class editDeliveryInfo extends Component {
                                 <label>وضعیت :</label>
                                 <select
                                     className="form-control text-center"
-                                    value={this.state.status}
-                                    onChange={(e) => this.fillParameterValue(e.target.value, "status")}
+                                    value={this.state.statusCode}
+                                    onChange={(e) => this.fillParameterValue(e.target.value, "statusCode")}
                                 >
                                     {option.map(
                                         (option) => {
@@ -118,22 +190,9 @@ class editDeliveryInfo extends Component {
                             </div>
                         </div>
 
-                        <div className="   justify-content-center py-3 col-11">
-                            {this.state.init ?
-                                <FaslMaliTable
-                                    baharDescription={this.state.baharDescription}
-                                    payizDescription={this.state.payizDescription}
-                                    tabestanDescription={this.state.tabestanDescription}
-                                    zemestanDescription={this.state.zemestanDescription}
-                                    tabestanStatus={this.state.tabestanStatus}
-                                    baharStatus={this.state.baharStatus}
-                                    payizStatus={this.state.payizStatus}
-                                    zemestanStatus={this.state.zemestanStatus}
-                                    check={true}
-                                />
-                                : null}
+                        <div className="rtl border bg-light shadow row w-100 m-0 py-4 px-2">
+                            <SearchResult headerInfo={headerInfo} searchResultList={seasonData} pageSize={pageSize}/>
                         </div>
-
 
                     </div>
 
@@ -142,7 +201,7 @@ class editDeliveryInfo extends Component {
                             <div className="p-2">
                                 <input type="button" className="btn btn-success" value="ثبت"
                                        onClick={() => {
-                                           this.addSalMali();
+                                           this.updateFiscalYear();
                                        }}/>
                             </div>
                             <div className="p-2">
@@ -158,4 +217,4 @@ class editDeliveryInfo extends Component {
     }
 }
 
-export default withRouter(editDeliveryInfo);
+export default withRouter(editFiscalYear);

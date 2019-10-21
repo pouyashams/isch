@@ -1,17 +1,17 @@
 const navLinks = [
 
     {
-        path: "/sal-mali",
+        path: "/fiscal-year",
         name: " سال مالی",
         icon: "fa fa-sliders",
     },
     {
-        path: "/modiriyat-sal-mali",
+        path: "/manage-fiscal-year",
         name: "مدیریت سال مالی",
         icon: "fa fa-sliders",
     },
     // {
-    //     path: "/vaziyat-prozhe-amaliyati",
+    //     path: "/operational-project",
     //     name: "وضعیت پروژه عملیاتی",
     //     icon: "fa fa-sliders",
     // },
@@ -49,13 +49,13 @@ const navLinks = [
     //     name: "وضعیت مشاوران",
     //     icon: "fa fa-sliders",
     // },
-    // {
-    //     path: "/etelaat-paye-sherkati",
-    //     name: "اطلاعات پایه شرکت ها",
-    //     icon: "fa fa-sliders",
-    // },
+    {
+        path: "/etelaat-paye-sherkati",
+        name: "اطلاعات پایه شرکت ها",
+        icon: "fa fa-sliders",
+    },
     // {x
-    //     path: "/mosvabat-heyat-modire",
+    //     path: "/board-approval",
     //     name: "مصوبات هیات مدیره",
     //     icon: "fa fa-sliders",
     // },

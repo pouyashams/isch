@@ -2,9 +2,10 @@ import React, {Component} from 'react'
 import {toast} from 'react-toastify';
 import SearchResult from "../search/search-result"
 import {withRouter} from 'react-router-dom';
+import {reciveFicalYear} from "../../services/fiscalYearService";
 
 
-class etelaatPayeSherkati extends Component {
+class manageFiscalYear extends Component {
 
     constructor(props) {
         super(props);
@@ -17,32 +18,26 @@ class etelaatPayeSherkati extends Component {
     }
 
 
-    async componentDidMount() {
+    async componentDidMount()
+    {
         try {
-            // const result = await loadAllCompany();
-            // if (result.status === 200) {
-            //     const data = [];
-            //     result.data.data.forEach((dataInfo) => {
-            //         data.push(
-            //             {
-            //                 name: dataInfo.name,
-            //                 nationalCode: dataInfo.nationalCode,
-            //                 activityTopic: dataInfo.activityTopic,
-            //                 registrationCode: dataInfo.registrationCode
-            //             }
-            //         )
-            //     });
-            this.setState({
-                data: [
-                    {
-                        year: 1397,
-                        description: "پویا شمسی پویا شمسی پویا شمسی پویا شمسی پویا شمسی پویا شمسی پویا شمسی",
-                        status: <h7 className="text-success font-weight-bold  ">فعال</h7>,
-                        baharDescription: "p[oefjrvugbiydhvbfcojdpkxos"
-                    }
-                ]
-            });
-
+            const result = await reciveFicalYear();
+            if (result.status === 200) {
+                const data = [];
+                result.data.data.forEach((dataInfo) => {
+                    data.push(
+                        {
+                            identifier: dataInfo.identifier,
+                            year: dataInfo.year,
+                            description: dataInfo.description,
+                            statusCode: dataInfo.status.code,
+                            statusName: dataInfo.status.name,
+                            fiscalMonthList: dataInfo.fiscalMonthList,
+                        }
+                    )
+                });
+                this.setState({data});
+            }
         } catch (ex) {
             if (ex.response && ex.response.status === 400) {
                 toast.error('خطایی در دریافت اطلاعات رخ داده است.');
@@ -52,9 +47,10 @@ class etelaatPayeSherkati extends Component {
     }
 
 
+
     onUpdate(searchResult) {
         this.props.history.push({
-            pathname: '/edit-sal-mali',
+            pathname: '/edit-fiscal-year',
             dataInfo: searchResult
 
         });
@@ -81,7 +77,7 @@ class etelaatPayeSherkati extends Component {
             headerTitleInfos: [
                 {name: "year", title: "سال"},
                 {name: "description", title: "توضیحات"},
-                {name: "status", title: "وضعیت"},
+                {name: "statusName", title: "وضعیت"},
             ]
         };
         return headerInfo;
@@ -111,4 +107,4 @@ class etelaatPayeSherkati extends Component {
     }
 }
 
-export default withRouter(etelaatPayeSherkati);
+export default withRouter(manageFiscalYear);

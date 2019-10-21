@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 // import {toast} from 'react-toastify';
 import "../../css/textArea.css"
-import SearchResult from "../search/search-result"
 import {withRouter} from 'react-router-dom';
 import Table from "./table"
 
@@ -18,7 +17,7 @@ class deliveryInfoManagement extends Component {
     }
     onBack() {
         this.props.history.push({
-            pathname: '/sal-mali',
+            pathname: '/fiscal-year',
         });
     }
     //

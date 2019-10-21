@@ -1,55 +1,103 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
-import FaslMaliTable from "../sal-mali/fasl-mali-table"
+import SearchResult from "../search/search-result"
 
-class editDeliveryInfo extends Component {
+class fiscalYearDetails extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            data: [],
+
+            pageSize: 5,
+            seasonData: [],
             year: "",
             status: "active",
             description: "",
-            payizDescription: "",
-            tabestanStatus: "",
-            tabestanDescription: "",
-            baharStatus: "",
-            baharDescription: "",
-            zemestanStatus: "",
-            zemestanDescription: "",
-            payizStatus: "",
-            init: false
+
+            // autumnDescription: "",
+            // autumnStatus: "",
+            //
+            // summerStatus: "",
+            // summerDescription: "",
+            //
+            // springStatus: "",
+            // springDescription: "",
+            //
+            // winterStatus: "",
+            // winterDescription: "",
+
+            identifier: "",
+
         };
+        this.onShow = this.onShow.bind(this);
 
     }
 
 
     async componentDidMount() {
         const {dataInfo} = this.props.location;
-        if (!dataInfo) return this.props.history.push('/sal-mali');
+        if (!dataInfo) return this.props.history.push('/fiscal-year');
+        const seasonData = [];
+        dataInfo.fiscalMonthList.forEach((data) => {
+                seasonData.push(
+                    {
+                        description: data.description,
+                        identifier: data.identifier,
+                        sessionName: data.session.name,
+                        sessionCode: data.session.code,
+                        statusCode: data.status.code,
+                        statusName: data.status.name,
+                        year: dataInfo.year,
+                    }
+                )
+        });
         this.setState({
+            seasonData,
             year: dataInfo.year,
-            status: dataInfo.status,
+            statusCode: dataInfo.statusCode,
+            statusName: dataInfo.statusName,
             description: dataInfo.description,
-            baharDescription: dataInfo.baharDescription,
-            baharStatus: dataInfo.baharStatus,
-            tabestanDescription: dataInfo.tabestanDescription,
-            tabestanStatus: dataInfo.tabestanStatus,
-            payizDescription: dataInfo.payizDescription,
-            payizStatus: dataInfo.payizStatus,
-            zemestanDescription: dataInfo.zemestanDescription,
-            zemestanStatus: dataInfo.zemestanStatus,
-            init: true
         });
     }
 
     cancel = () => {
-        this.props.history.push('/sal-mali')
+        this.props.history.push('/fiscal-year')
     };
 
 
+    getResultTableHeader() {
+        let headerInfo = {
+            showCheckBox: false,
+            actions: [
+                {
+                    name: 'edit',
+                    title: 'مشاهده',
+                    icon: 'fa fa-th-list',
+                    style: 'btn btn-primary btn-xs',
+                    onclick: this.onShow
+                },
+            ],
+            headerTitleInfos: [
+                {name: "sessionName", title: "سال"},
+                {name: "description", title: "توضیحات"},
+                {name: "statusName", title: "وضعیت"},
+            ]
+        };
+        return headerInfo;
+    }
+
+    onShow(searchResult) {
+        this.props.history.push({
+            pathname: '/forms',
+            dataInfo: searchResult
+
+        });
+    }
+
+
     render() {
+        const {seasonData, pageSize} = this.state;
+        const headerInfo = this.getResultTableHeader();
         return (
 
             <div
@@ -69,14 +117,13 @@ class editDeliveryInfo extends Component {
                                        value={this.state.year}
                                 />
                             </div>
+
                             <div className="form-group col-2  float-right">
                                 <label>وضعیت :</label>
                                 <select
                                     className="form-control text-center"
-                                    value={this.state.status}
                                 >
-
-                                    <option value={"active"}>{"فعال"}</option>
+                                    <option value={this.state.statusCode}>{this.state.statusName}</option>
                                 </select>
                             </div>
                             <div className="form-group col-8 float-right">
@@ -90,22 +137,10 @@ class editDeliveryInfo extends Component {
                                 />
                             </div>
                         </div>
-
-
-                        {this.state.init ?
-                            <FaslMaliTable
-                                year={this.state.year}
-                                baharDescription={this.state.baharDescription}
-                                payizDescription={this.state.payizDescription}
-                                tabestanDescription={this.state.tabestanDescription}
-                                zemestanDescription={this.state.zemestanDescription}
-                                tabestanStatus={this.state.tabestanStatus}
-                                baharStatus={this.state.baharStatus}
-                                payizStatus={this.state.payizStatus}
-                                zemestanStatus={this.state.zemestanStatus}
-                                check={true}
-                            />
-                            : null}
+                        <div
+                            className="rtl border bg-light shadow row w-100 m-0 py-4 px-2">
+                            <SearchResult headerInfo={headerInfo} searchResultList={seasonData} pageSize={pageSize}/>
+                        </div>
 
                     </div>
 
@@ -124,4 +159,4 @@ class editDeliveryInfo extends Component {
     }
 }
 
-export default withRouter(editDeliveryInfo);
+export default withRouter(fiscalYearDetails);

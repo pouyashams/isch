@@ -1,95 +1,102 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
-// import {toast} from 'react-toastify';
-import SearchResult from "../search/search-result"
+import {toast} from "react-toastify";
+import {editOperationalProjects} from "../../services/operationalProjectService";
 
-class editDeliveryInfo extends Component {
+class editOperationalProject extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            data: [],
-            pageSize: 5,
             name: "",
-            mozuProje: "",
-            sefareshDahnde: "",
-            tasvibMagham: "",
-            gharardad: "",
-            mablaghGharardad: "",
-            daramdShenasayi: "",
-            darsadPishraft: "",
-            makharejAnjamide: "",
-            koleMakharej: "",
+            projectSubject: "",
+            requester: "",
+            typeOfApproveCompetent: "",
+            contractStatus: "",
+            contractAmount: "",
+            incomeMoney: "",
+            expensesMoney: "",
+            estimatedExpensesMoney: "",
+            percentageOfWorkProgress: "",
+            fiscalMonthId: "",
+            id: "",
         };
         this.onBack = this.onBack.bind(this);
-
     }
+
+    componentDidMount() {
+        const {dataInfo} = this.props.location;
+        const {id} = this.props.location;
+        if (!dataInfo) return this.props.history.push('/fiscal-year');
+        if (!id) return this.props.history.push('/fiscal-year');
+        console.log(dataInfo, 432)
+        this.setState({
+            id: dataInfo.id,
+            fiscalMonthId: id,
+            name: dataInfo.name,
+            projectSubject: dataInfo.projectSubject,
+            requester: dataInfo.requester,
+            typeOfApproveCompetent: dataInfo.typeOfApproveCompetent,
+            contractStatus: dataInfo.contractStatus,
+            contractAmount: dataInfo.contractAmount,
+            incomeMoney: dataInfo.incomeMoney,
+            expensesMoney: dataInfo.expensesMoney,
+            estimatedExpensesMoney: dataInfo.estimatedExpensesMoney,
+            percentageOfWorkProgress: dataInfo.percentageOfWorkProgress
+        });
+    }
+
 
     onBack() {
         this.props.history.push({
-            pathname: '/vaziyat-prozhe-amaliyati',
+            pathname: '/operational-project',
+            dataInfo: this.state.fiscalMonthId,
         });
     };
 
     fillParameterValue = (value, name) => {
         this.setState({[name]: value});
     };
-    addData = () => {
-        const data = this.state.data;
-        data.push(
-            {
-                name: this.state.name,
-                gharardad: this.state.gharardad,
-                tasvibMagham: this.state.tasvibMagham,
-                sefareshDahnde: this.state.sefareshDahnde,
-                mozuProje: this.state.mozuProje,
-                mablaghGharardad: this.state.mablaghGharardad,
-                daramdShenasayi: this.state.daramdShenasayi,
-                darsadPishraft: this.state.darsadPishraft,
-                makharejAnjamide: this.state.makharejAnjamide,
-                koleMakharej: this.state.koleMakharej,
+    sendInfo = async () => {
+        const data = {
+            fiscalMonth: {
+                id: this.state.fiscalMonthId
+            },
+            id: this.state.id,
+            name: this.state.name,
+            projectSubject: this.state.projectSubject,
+            requester: this.state.requester,
+            typeOfApproveCompetent: this.state.typeOfApproveCompetent,
+            contractStatus: this.state.contractStatus,
+            contractAmount: this.state.contractAmount,
+            incomeMoney: this.state.incomeMoney,
+            expensesMoney: this.state.expensesMoney,
+            estimatedExpensesMoney: this.state.estimatedExpensesMoney,
+            percentageOfWorkProgress: this.state.percentageOfWorkProgress
+        };
+        console.log(data, 123)
+        try {
+            const result = await editOperationalProjects(data);
+            if (result.status === 200) {
+                toast.success('عملیات با موفقیت انجام شد.');
+                this.props.history.push({
+                    pathname: '/operational-project',
+                    dataInfo: this.state.fiscalMonthId,
+                });
             }
-        );
-        this.setState({data});
-        this.setState({
-            name: "",
-            mozuProje: "",
-            sefareshDahnde: "",
-            tasvibMagham: "",
-            gharardad: "",
-            mablaghGharardad: "",
-            daramdShenasayi: "",
-            darsadPishraft: "",
-            makharejAnjamide: "",
-            koleMakharej: "",
-        });
+        } catch (ex) {
+            if (ex.response && ex.response.status === 400) {
+                toast.error('خطایی در دریافت اطلاعات رخ داده است.');
+                this.props.history.push({
+                    pathname: '/operational-project',
+                    dataInfo: this.state.fiscalMonthId,
+                });
+            }
+        }
+        document.getElementById("loading").style.display = "none";
     };
 
-    getResultTableHeader() {
-        let headerInfo = {
-            showCheckBox: false,
-            actions: [],
-            headerTitleInfos: [
-                {name: "name", title: "نام پروژه"},
-                {name: "mozuProje", title: "موضوع پروژه"},
-                {name: "sefareshDahnde", title: "سفارش دهنده"},
-                {name: "tasvibMagham", title: "نحوه تصویب مقامات ذی صلاح"},
-                {name: "gharardad", title: "وضعیت قرارداد"},
-                {name: "mablaghGharardad", title: "مبلغ قرارداد"},
-                {name: "daramdShenasayi", title: "درامد شناسایی شده تاکنون"},
-                {name: "darsadPishraft", title: "درصد پیشرفت کار"},
-                {name: "makharejAnjamide", title: "مخارج انجام شده تاکنون"},
-                {name: "koleMakharej", title: "کل مخارج براوردی"},
-            ]
-        };
-        return headerInfo;
-    }
-
-
     render() {
-        const {data, pageSize} = this.state;
-        const headerInfo = this.getResultTableHeader();
-
         return (
             <div
                 className="rtl border bg-light shadow row w-100 m-0 text-center justify-content-center align-items-center my-3">
@@ -116,8 +123,8 @@ class editDeliveryInfo extends Component {
                                    type="input"
                                    step="any"
                                    placeholder="---"
-                                   value={this.state.mozuProje}
-                                   name="mozuProje"
+                                   value={this.state.projectSubject}
+                                   name="projectSubject"
                                    onChange={(e) => this.fillParameterValue(e.target.value, e.target.name)}
                             />
                         </div>
@@ -127,8 +134,8 @@ class editDeliveryInfo extends Component {
                                    type="input"
                                    step="any"
                                    placeholder="---"
-                                   value={this.state.sefareshDahnde}
-                                   name="sefareshDahnde"
+                                   value={this.state.requester}
+                                   name="requester"
                                    onChange={(e) => this.fillParameterValue(e.target.value, e.target.name)}
                             />
                         </div>
@@ -138,8 +145,8 @@ class editDeliveryInfo extends Component {
                                    type="input"
                                    step="any"
                                    placeholder="---"
-                                   value={this.state.tasvibMagham}
-                                   name="tasvibMagham"
+                                   value={this.state.typeOfApproveCompetent}
+                                   name="typeOfApproveCompetent"
                                    onChange={(e) => this.fillParameterValue(e.target.value, e.target.name)}
                             />
                         </div>
@@ -149,91 +156,78 @@ class editDeliveryInfo extends Component {
                                    type="input"
                                    step="any"
                                    placeholder="---"
-                                   value={this.state.gharardad}
-                                   name="gharardad"
+                                   value={this.state.contractStatus}
+                                   name="contractStatus"
                                    onChange={(e) => this.fillParameterValue(e.target.value, e.target.name)}
                             />
                         </div>
                         <div className="form-group col-12 col-sm-6 col-md-3 float-right">
                             <label>مبلغ قرارداد :</label>
                             <input className="form-control text-center"
-                                   type="input"
+                                   type="number"
                                    step="any"
                                    placeholder="---"
-                                   value={this.state.mablaghGharardad}
-                                   name="mablaghGharardad"
+                                   value={this.state.contractAmount}
+                                   name="contractAmount"
                                    onChange={(e) => this.fillParameterValue(e.target.value, e.target.name)}
                             />
                         </div>
                         <div className="form-group col-12 col-sm-6 col-md-3 float-right">
                             <label>درامد شناسایی شده تاکنون :</label>
                             <input className="form-control text-center"
-                                   type="input"
+                                   type="number"
                                    step="any"
                                    placeholder="---"
-                                   value={this.state.daramdShenasayi}
-                                   name="daramdShenasayi"
+                                   value={this.state.incomeMoney}
+                                   name="incomeMoney"
                                    onChange={(e) => this.fillParameterValue(e.target.value, e.target.name)}
                             />
                         </div>
                         <div className="form-group col-12 col-sm-6 col-md-3 float-right">
                             <label>درصد پیشرفت کار :</label>
                             <input className="form-control text-center"
-                                   type="input"
+                                   type="number"
                                    step="any"
                                    placeholder="---"
-                                   value={this.state.darsadPishraft}
-                                   name="darsadPishraft"
+                                   value={this.state.expensesMoney}
+                                   name="expensesMoney"
                                    onChange={(e) => this.fillParameterValue(e.target.value, e.target.name)}
                             />
                         </div>
                         <div className="form-group col-12 col-sm-6 col-md-3 float-right">
                             <label>مخارج انجام شده تاکنون :</label>
                             <input className="form-control text-center"
-                                   type="input"
+                                   type="number"
                                    step="any"
                                    placeholder="---"
-                                   value={this.state.makharejAnjamide}
-                                   name="makharejAnjamide"
+                                   value={this.state.estimatedExpensesMoney}
+                                   name="estimatedExpensesMoney"
                                    onChange={(e) => this.fillParameterValue(e.target.value, e.target.name)}
                             />
                         </div>
                         <div className="form-group col-12 col-sm-6 col-md-3 float-right">
                             <label>کل مخارج براوردی :</label>
                             <input className="form-control text-center"
-                                   type="input"
+                                   type="number"
                                    step="any"
                                    placeholder="---"
-                                   value={this.state.koleMakharej}
-                                   name="koleMakharej"
+                                   value={this.state.percentageOfWorkProgress}
+                                   name="percentageOfWorkProgress"
                                    onChange={(e) => this.fillParameterValue(e.target.value, e.target.name)}
                             />
                         </div>
-                        <div className=" row w-100 m-0 text-center justify-content-center align-items-center my-3">
+                        <div className="col-12 p-4 row text-center justify-content-center">
                             <div className="p-2">
-                                <input type="button" className="btn btn-warning" value="افزودن"
-                                       onClick={this.addData}/>
+                                <input type="button" className="btn btn-success" value="ثبت نهایی"
+                                       onClick={this.sendInfo}/>
+                            </div>
+
+                            <div className="p-2">
+                                <input type="button" className="btn btn-danger" value="بازگشت"
+                                       onClick={this.onBack}/>
                             </div>
                         </div>
                     </div>
-                    {this.state.data.length !== 0 ?
-                        <div>
-                            <div className="rtl border bg-light shadow row w-100 m-0 py-4 px-2">
-                                <SearchResult headerInfo={headerInfo} searchResultList={data} pageSize={pageSize}/>
-                            </div>
-                            <div className="col-12 p-4 row text-center justify-content-center">
-                                <div className="p-2">
-                                    <input type="button" className="btn btn-success" value="ثبت نهایی"
-                                           onClick={this.addTime}/>
-                                </div>
-
-                                <div className="p-2">
-                                    <input type="button" className="btn btn-danger" value="لغو"
-                                           onClick={this.onBack}/>
-                                </div>
-                            </div>
-                        </div> : null
-                    }
 
                 </div>
             </div>
@@ -241,4 +235,4 @@ class editDeliveryInfo extends Component {
     }
 }
 
-export default withRouter(editDeliveryInfo);
+export default withRouter(editOperationalProject);

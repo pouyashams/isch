@@ -12,6 +12,7 @@ class forms extends Component {
             data: [],
             status: "",
             name: "",
+            identifier:"",
         };
         this.onUpdate = this.onUpdate.bind(this);
     }
@@ -19,8 +20,8 @@ class forms extends Component {
 
     async componentDidMount() {
         const {dataInfo} = this.props.location;
-        if (!dataInfo) return this.props.history.push('/sal-mali');
-        console.log()
+        if (!dataInfo) return this.props.history.push('/fiscal-year');
+        console.log(dataInfo,12345);
         this.setState({
             data: [
                 {
@@ -48,9 +49,6 @@ class forms extends Component {
                     form: <span className="font-weight-bold">"وضعیت مشاوران</span>,
                     identifier: 8
                 },{
-                    form: <span className="font-weight-bold">اطلاعات پایه شرکت ها</span>,
-                    identifier: 9
-                },{
                     form: <span className="font-weight-bold">مصوبات هیات مدیره</span>,
                     identifier: 10
                 },{
@@ -73,8 +71,9 @@ class forms extends Component {
                     identifier: 16
                 },
             ],
-            name: dataInfo.name,
-            status: dataInfo.status
+            name: dataInfo.sessionName,
+            status: dataInfo.year,
+            identifier:dataInfo.identifier
         });
     }
 
@@ -82,68 +81,79 @@ class forms extends Component {
     onUpdate(data) {
         if (data.identifier === 1) {
             this.props.history.push({
-                pathname: '/vaziyat-prozhe-amaliyati',
+                pathname: '/operational-project',
+                dataInfo: this.state.identifier
             });
         }
         else if (data.identifier === 2) {
             this.props.history.push({
                 pathname: '/tarkib-darayi',
+                dataInfo: this.state.identifier
             });
         }  else if (data.identifier === 3) {
             this.props.history.push({
                 pathname: '/motalebat-movagh',
+                dataInfo: this.state.identifier
             });
         } else if (data.identifier === 4) {
             this.props.history.push({
                 pathname: '/gozaresh-mamuriyat-kharej-keshvar',
+                dataInfo: this.state.identifier
             });
         } else if (data.identifier === 5) {
             this.props.history.push({
                 pathname: '/gozaresh-hesabresi-mostaghel',
+                dataInfo: this.state.identifier
             });
         } else if (data.identifier === 6) {
             this.props.history.push({
                 pathname: '/gharardadhaye-mohem',
+                dataInfo: this.state.identifier
             });
         } else if (data.identifier === 7) {
             this.props.history.push({
                 pathname: '/staff-status',
+                dataInfo: this.state.identifier
             });
         }else if (data.identifier === 8) {
             this.props.history.push({
                 pathname: '/status-of-consultants',
-            });
-        }else if (data.identifier === 9) {
-            this.props.history.push({
-                pathname: '/etelaat-paye-sherkati',
+                dataInfo: this.state.identifier
             });
         }else if (data.identifier === 10) {
             this.props.history.push({
-                pathname: '/mosvabat-heyat-modire',
+                pathname: '/board-approval',
+                dataInfo: this.state.identifier
             });
         }else if (data.identifier === 11) {
             this.props.history.push({
                 pathname: '/vaziyat-tahodat-ghanuni',
+                dataInfo: this.state.identifier
             });
         }else if (data.identifier === 12) {
             this.props.history.push({
                 pathname: '/kharid-furush-darayi-sabet',
+                dataInfo: this.state.identifier
             });
         }else if (data.identifier === 13) {
             this.props.history.push({
                 pathname: '/budje-naghdi',
+                dataInfo: this.state.identifier
             });
         }else if (data.identifier === 14) {
             this.props.history.push({
                 pathname: '/soud-ziyan-dore',
+                dataInfo: this.state.identifier
             });
         }else if (data.identifier === 15) {
             this.props.history.push({
                 pathname: '/sarmayegozari-tey-dore',
+                dataInfo: this.state.identifier
             });
         }else if (data.identifier === 16) {
             this.props.history.push({
                 pathname: '/soud-saham-mosavab',
+                dataInfo: this.state.identifier
             });
         }
 

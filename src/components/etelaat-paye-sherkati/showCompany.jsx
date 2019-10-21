@@ -29,7 +29,7 @@ class showCompany extends Component {
 
     onBack() {
         this.props.history.push({
-            pathname: '/sal-mali',
+            pathname: '/fiscal-year',
         });
     }
     componentDidMount() {
