@@ -18,8 +18,7 @@ class manageFiscalYear extends Component {
     }
 
 
-    async componentDidMount()
-    {
+    async componentDidMount() {
         try {
             const result = await reciveFicalYear();
             if (result.status === 200) {

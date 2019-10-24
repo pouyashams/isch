@@ -47,7 +47,6 @@ import salMali from "./components/fiscalYear/fiscalYear";
 import clientAddSalMali from "./components/fiscalYear/fiscalYearDetails";
 
 import forms from "./components/fiscalYear/forms";
-import editFiscalYearDetails from "./components/manageFiscalYear/editFiscalYearDetails";
 import editOperationalProject from "./components/operationalProject/editOperationalProject";
 import editBoardApproval from "./components/boardApproval/editBoardApproval";
 
@@ -136,7 +135,6 @@ class App extends Component {
                                 <PrivateRoute path="/fiscal-year-details" exact={false} component={clientAddSalMali}/>
 
                                 <PrivateRoute path="/forms" exact={false} component={forms}/>
-                                <PrivateRoute path="/edit-fiscal-year-details" exact={false} component={editFiscalYearDetails}/>
                                 <PrivateRoute path="/edit-operational-project" exact={false} component={editOperationalProject}/>
 
                                 <PrivateRoute path="/edi-board-approval" exact={false} component={editBoardApproval}/>

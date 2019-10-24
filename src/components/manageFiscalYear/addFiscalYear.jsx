@@ -12,19 +12,19 @@ class addFiscalYear extends Component {
         this.state = {
 
             year: "",
-            status: "",
+            status: "active",
             description: "",
 
             autumnDescription: "",
-            autumnStatus: "",
+            autumnStatus: "deActive",
 
-            summerStatus: "",
+            summerStatus: "deActive",
             summerDescription: "",
 
-            springStatus: "",
+            springStatus: "active",
             springDescription: "",
 
-            winterStatus: "",
+            winterStatus: "deActive",
             winterDescription: "",
         };
     }
@@ -84,14 +84,15 @@ class addFiscalYear extends Component {
                 }
             ]
         };
-        console.log(data)
         try {
             const result = await registerFicalYear(data);
             if (result.status === 200) {
+                this.props.history.goBack();
                 toast.success('عملیات با موفقیت انجام شد.');
             }
         } catch (ex) {
             if (ex.response && ex.response.status === 400) {
+                this.props.history.goBack();
                 toast.error('خطایی در دریافت اطلاعات رخ داده است.');
             }
         }
@@ -118,17 +119,15 @@ class addFiscalYear extends Component {
                         <select
                             className="form-control  text-center"
                             style={{"text-align-last": "center", "padding-right": "29px"}}
-
                             onChange={(e) => this.fillParameterValue(e.target.value, "springStatus")}
                         >
-                            {[{value: "active ", title: "فعال ", selected: true}, {
-                                value: "deActive ",
+                            {[{value: "active", title: "فعال ", selected: true}, {
+                                value: "deActive",
                                 title: " غیر فعال ",
                                 selected: false
                             }].map(
                                 (option) => {
-                                    return (<option value={option.value}
-                                                    selected={option.selected}>{option.title}</option>);
+                                    return (<option value={option.value} selected={option.value === this.state.springStatus}>{option.title}</option>);
                                 }
                             )}
                         </select>
@@ -150,17 +149,15 @@ class addFiscalYear extends Component {
                         <select
                             className="form-control  text-center"
                             style={{"text-align-last": "center", "padding-right": "29px"}}
-
                             onChange={(e) => this.fillParameterValue(e.target.value, "summerStatus")}
                         >
-                            {[{value: "active ", title: "فعال ", selected: false}, {
-                                value: "deActive ",
+                            {[{value: "active", title: "فعال", selected: false}, {
+                                value: "deActive",
                                 title: " غیر فعال ",
                                 selected: true
                             }].map(
                                 (option) => {
-                                    return (<option value={option.value}
-                                                    selected={option.selected}>{option.title}</option>);
+                                    return (<option value={option.value} selected={option.value === this.state.summerStatus}>{option.title}</option>);
                                 }
                             )}
                         </select>
@@ -181,17 +178,15 @@ class addFiscalYear extends Component {
                     <select
                         className="form-control  text-center"
                         style={{"text-align-last": "center", "padding-right": "29px"}}
-
                         onChange={(e) => this.fillParameterValue(e.target.value, "autumnStatus")}
                     >
-                        {[{value: "active ", title: "فعال ", selected: false}, {
-                            value: "deActive ",
+                        {[{value: "active", title: "فعال ", selected: false}, {
+                            value: "deActive",
                             title: " غیر فعال ",
                             selected: true
                         }].map(
                             (option) => {
-                                return (
-                                    <option value={option.value} selected={option.selected}>{option.title}</option>);
+                                return (<option value={option.value} selected={option.value === this.state.autumnStatus}>{option.title}</option>);
                             }
                         )}
                     </select>
@@ -212,29 +207,24 @@ class addFiscalYear extends Component {
                     <select
                         className="form-control  text-center"
                         style={{"text-align-last": "center", "padding-right": "29px"}}
-
                         onChange={(e) => this.fillParameterValue(e.target.value, "winterStatus")}
                     >
-                        {[{value: "active ", title: "فعال ", selected: false}, {
-                            value: "deActive ",
+                        {[{value: "active", title: "فعال ", selected: false}, {
+                            value: "deActive",
                             title: " غیر فعال ",
                             selected: true
                         }].map(
                             (option) => {
-                                return (
-                                    <option value={option.value} selected={option.selected}>{option.title}</option>);
+                                return (<option value={option.value} selected={option.value === this.state.winterStatus}>{option.title}</option>);
                             }
                         )}
                     </select>
                 </div>
             },
-
-
         ];
-        const option = [{value: "active ", title: "فعال ", selected: true}, {
-            value: "deActive ",
-            title: " غیر فعال ",
-            selected: false
+        const option = [{value: "active", title: "فعال"}, {
+            value: "deActive",
+            title: "غیر فعال",
         }];
         return (
 
@@ -260,13 +250,11 @@ class addFiscalYear extends Component {
                                 <label>وضعیت :</label>
                                 <select
                                     className="form-control text-center"
-                                    value={this.state.status}
                                     onChange={(e) => this.fillParameterValue(e.target.value, "status")}
                                 >
                                     {option.map(
                                         (option) => {
-                                            return (<option value={option.value}
-                                                            selected={option.selected}>{option.title}</option>);
+                                            return (<option value={option.value} selected={option.value === this.state.status}>{option.title}</option>);
                                         }
                                     )}
                                 </select>

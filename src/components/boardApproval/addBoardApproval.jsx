@@ -66,7 +66,6 @@ class addBoardApproval extends Component {
 
             }
         );
-        console.log(data,12345);
         this.setState({data});
 
 

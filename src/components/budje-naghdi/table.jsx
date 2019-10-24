@@ -28,7 +28,6 @@ class SearchResult extends Component {
         //         zemestanDescription: this.props.zemestanDescription,
         //         zemestanStatus: this.props.zemestanStatus
         //     });
-        //     console.log(this.state.baharDescription,"1234")
         //
         // }
     }

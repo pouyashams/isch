@@ -37,7 +37,6 @@ class boardApproval extends Component {
             const result = await reciveBoardApproval(data);
             if (result.status === 200) {
                 const data = result.data.data;
-                console.log(data)
                 this.setState({data});
             }
         } catch (ex) {

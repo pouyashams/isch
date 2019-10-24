@@ -62,7 +62,6 @@ class editBoardApproval extends Component {
             details: this.state.details,
             actions: this.state.actions,
         };
-        console.log(allData, 12345);
         try {
             const result = await editBoardApprovals(allData);
             if (result.status === 200) {

@@ -29,7 +29,6 @@ class editOperationalProject extends Component {
         const {id} = this.props.location;
         if (!dataInfo) return this.props.history.push('/fiscal-year');
         if (!id) return this.props.history.push('/fiscal-year');
-        console.log(dataInfo, 432)
         this.setState({
             id: dataInfo.id,
             fiscalMonthId: id,
@@ -74,7 +73,6 @@ class editOperationalProject extends Component {
             estimatedExpensesMoney: this.state.estimatedExpensesMoney,
             percentageOfWorkProgress: this.state.percentageOfWorkProgress
         };
-        console.log(data, 123)
         try {
             const result = await editOperationalProjects(data);
             if (result.status === 200) {

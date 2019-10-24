@@ -21,7 +21,6 @@ class forms extends Component {
     async componentDidMount() {
         const {dataInfo} = this.props.location;
         if (!dataInfo) return this.props.history.push('/fiscal-year');
-        console.log(dataInfo,12345);
         this.setState({
             data: [
                 {

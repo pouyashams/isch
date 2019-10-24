@@ -76,7 +76,6 @@ class editDeliveryInfo extends Component {
             estimatedExpensesMoney: this.state.estimatedExpensesMoney,
             percentageOfWorkProgress: this.state.percentageOfWorkProgress,
         };
-        console.log(allData)
         try {
             const result = await addOperationalProject(allData);
             if (result.status === 200) {
