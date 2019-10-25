@@ -95,9 +95,10 @@ class editBoardApproval extends Component {
 
                         <div className="form-group  py-2 px-4 col-12 col-sm-6 col-md-3 float-right">
                             <label>تاریخ مصوبه :</label>
+                            {console.log(this.state.date,12345)}
                             <DatePicker
                                 name={"date"}
-                                value={this.state.date}
+                                preSelected={this.state.date}
                                 placeholder="---"
                                 onChange={this.fillParameterValue}
                             />
@@ -106,7 +107,7 @@ class editBoardApproval extends Component {
                             <label>تاریخ انجام :</label>
                             <DatePicker
                                 name={"operationalDate"}
-                                value={this.state.operationalDate}
+                                preSelected={this.state.operationalDate}
                                 placeholder="---"
                                 onChange={this.fillParameterValue}
                             />

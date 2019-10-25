@@ -57,7 +57,7 @@ class manageFiscalYear extends Component {
 
     onAdd() {
         this.props.history.push({
-            pathname: '/add-sal-mali',
+            pathname: '/add-fiscal-year',
         });
     }
 

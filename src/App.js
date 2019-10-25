@@ -126,7 +126,7 @@ class App extends Component {
 
 
                                 <PrivateRoute path="/manage-fiscal-year" exact={false} component={modiriyatSalMali}/>
-                                <PrivateRoute path="/add-sal-mali" exact={false} component={addSalMali}/>
+                                <PrivateRoute path="/add-fiscal-year" exact={false} component={addSalMali}/>
                                 <PrivateRoute path="/edit-fiscal-year" exact={false} component={editSalMali}/>
 
                                 <PrivateRoute path="/fiscal-year" exact={false} component={salMali}/>
@@ -139,7 +139,7 @@ class App extends Component {
 
                                 <PrivateRoute path="/edi-board-approval" exact={false} component={editBoardApproval}/>
 
-                                <PrivateRoute path="/" exact={true} component={telaatPayeSherkati}/>
+                                <PrivateRoute path="/" exact={true} component={salMali}/>
 
                                 <Redirect to="/not-found"/>
                             </Switch>

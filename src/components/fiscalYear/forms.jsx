@@ -27,7 +27,7 @@ class forms extends Component {
                     form: <span className="font-weight-bold">وضعیت پروژه عملیاتی</span>,
                     identifier: 1
                 }, {
-                    form: <span className="font-weight-bold">ترکیب دارایی ها</span>,
+                    form: <span className="font-weight-bold">مصوبات هیات مدیره</span>,
                     identifier: 2
                 }, {
                     form: <span className="font-weight-bold">مطالبات معوق</span>,
@@ -48,7 +48,7 @@ class forms extends Component {
                     form: <span className="font-weight-bold">"وضعیت مشاوران</span>,
                     identifier: 8
                 },{
-                    form: <span className="font-weight-bold">مصوبات هیات مدیره</span>,
+                    form: <span className="font-weight-bold">ترکیب دارایی ها</span>,
                     identifier: 10
                 },{
                     form: <span className="font-weight-bold">وضعیت تعهدات قانونی</span>,
@@ -86,7 +86,7 @@ class forms extends Component {
         }
         else if (data.identifier === 2) {
             this.props.history.push({
-                pathname: '/tarkib-darayi',
+                pathname: '/board-approval',
                 dataInfo: this.state.identifier
             });
         }  else if (data.identifier === 3) {
@@ -121,7 +121,7 @@ class forms extends Component {
             });
         }else if (data.identifier === 10) {
             this.props.history.push({
-                pathname: '/board-approval',
+                pathname: '/tarkib-darayi',
                 dataInfo: this.state.identifier
             });
         }else if (data.identifier === 11) {
